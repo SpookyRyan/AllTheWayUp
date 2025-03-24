@@ -3,6 +3,7 @@ package org.example.scenes;
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.scenes.StaticScene;
 import org.example.AllTheWayUp;
+import org.example.entities.LockerKnop;
 import org.example.entities.StartKnop;
 
 
@@ -22,7 +23,8 @@ public class VoorPagina extends StaticScene {
 
     @Override
     public void setupEntities() {
-        addEntity(new StartKnop(new Coordinate2D(200, 400), game));
+        addEntity(new StartKnop(new Coordinate2D(180, 200), game));
+        addEntity(new LockerKnop(new Coordinate2D(105, 300), game));
     }
 
 }
