@@ -6,7 +6,7 @@ public class SpelOver extends StaticScene {
     @Override
     public void setupScene() {
     setBackgroundAudio("audio/SpelLevelMuziek.mp3");
-    setBackgroundAudioVolume(0.3);
+    setBackgroundAudioVolume(0.2);
     }
 
     @Override
