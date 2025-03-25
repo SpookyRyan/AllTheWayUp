@@ -33,16 +33,26 @@ public class Uppie extends DynamicSpriteEntity implements Collided, KeyListener,
             game.setActiveScene(2);
         }
 
+        switch(sceneBorder){
+            case LEFT:
+                setAnchorLocationX(getSceneWidth() - getWidth() + 30);
+                break;
+            case RIGHT:
+                setAnchorLocationX(-30);
+            default:
+                break;
+        }
+
+
+
     }
 
     @Override
     public void onPressedKeysChange(Set<KeyCode> pressedKeys){
         if(pressedKeys.contains(KeyCode.LEFT)){
             setMotion(3,270d);
-            setCurrentFrameIndex(0);
         } else if(pressedKeys.contains(KeyCode.RIGHT)){
             setMotion(3,90d);
-            setCurrentFrameIndex(1);
         }
     }
 
