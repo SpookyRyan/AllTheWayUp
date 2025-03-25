@@ -1,11 +1,5 @@
 package org.example.entities;
 
-<<<<<<<< HEAD:src/main/java/org/example/entities/knop/LockerKnop.java
-package org.example.entities.knop;
-========
-package org.example.entities.knoppen;
->>>>>>>> origin/Development:src/main/java/org/example/entities/knoppen/LockerKnop.java
-
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.entities.impl.TextEntity;
 import com.github.hanyaeger.api.userinput.MouseButtonPressedListener;
