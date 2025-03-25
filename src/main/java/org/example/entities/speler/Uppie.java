@@ -15,6 +15,10 @@ import java.util.List;
 import java.util.Set;
 
 public class Uppie extends DynamicSpriteEntity implements Collided, KeyListener, Newtonian, SceneBorderCrossingWatcher {
+    private long vorigeSprongTijd;
+    private boolean isInSprong = false;
+
+
     protected Uppie(String resource, Coordinate2D initialLocation) {
         super(resource, initialLocation);
     }
@@ -25,8 +29,28 @@ public class Uppie extends DynamicSpriteEntity implements Collided, KeyListener,
     }
 
     @Override
-    public void onPressedKeysChange(Set<KeyCode> set) {
+    public void onPressedKeysChange(Set<KeyCode> pressedKeys){
+        if(pressedKeys.contains(KeyCode.LEFT)){
+            setMotion(3,270d);
+            setCurrentFrameIndex(0);
+        } else if(pressedKeys.contains(KeyCode.RIGHT)){
+            setMotion(3,90d);
+            setCurrentFrameIndex(1);
+        }
+    }
 
+    public void AutomatischSpringen(){
+        long tijd = System.currentTimeMillis();
+        long sprongDuur = 1000;
+        if (!isInSprong) {
+            setMotion(10, 0d);
+            isInSprong = true;
+            vorigeSprongTijd = tijd;
+        } else if(tijd - vorigeSprongTijd > sprongDuur) {
+            setMotion(10, 180d);
+            isInSprong = false;
+            vorigeSprongTijd = tijd;
+        }
     }
 
     @Override
