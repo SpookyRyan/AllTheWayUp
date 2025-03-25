@@ -1,6 +1,7 @@
 package org.example.entities.speler;
 
 import com.github.hanyaeger.api.Coordinate2D;
+import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.entities.Collided;
 import com.github.hanyaeger.api.entities.Collider;
 import com.github.hanyaeger.api.entities.Newtonian;
@@ -13,13 +14,13 @@ import javafx.scene.input.KeyCode;
 import java.util.List;
 import java.util.Set;
 
-public class Uppie extends DynamicSpriteEntity implements Collided, KeyListener, Newtonian, SceneBorderCrossingWatcher {
+public class Uppie extends DynamicSpriteEntity implements Collided, KeyListener, SceneBorderCrossingWatcher {
     private long vorigeSprongTijd;
     private boolean isInSprong = false;
 
 
-    protected Uppie(String resource, Coordinate2D initialLocation) {
-        super(resource, initialLocation);
+    public Uppie(Coordinate2D positie, Size grootte) {
+        super("Sprites/Uppie.png", positie, grootte);
     }
 
     @Override
