@@ -3,7 +3,10 @@ package org.example.entities.platformen;
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.entities.EntitySpawner;
+import javafx.application.Platform;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 
@@ -12,6 +15,7 @@ public class PlatformSpawner extends EntitySpawner {
     private final double sceneHeight;
     private final Random random;
     private int platformGeplaatst = 0;
+    private final List<Coordinate2D> platformLocaties = new ArrayList<>();
 
     public PlatformSpawner(long intervalInMs, double sceneWidth, double sceneHeight) {
         super(intervalInMs);
@@ -24,15 +28,28 @@ public class PlatformSpawner extends EntitySpawner {
     protected void spawnEntities() {
 
         while (platformGeplaatst < 10) {
-            double x = random.nextDouble() * sceneWidth;
+            double x = random.nextDouble() * (sceneWidth - 60 * 2) + 60;
             double y = random.nextDouble() * sceneHeight;
+            Coordinate2D nieuweLocatie = new Coordinate2D(x, y);
 
-            if (random.nextDouble() < 0.7) {
-                spawn(new NormaalPlatform(new Coordinate2D(x, y), new Size(60, 40)));
-            } else {
-                spawn(new BreekbaarPlatform(new Coordinate2D(x, y)));
+            if(!isOverlappend(nieuweLocatie)) {
+                if (random.nextDouble() < 0.7) {
+                    spawn(new NormaalPlatform(new Coordinate2D(x, y), new Size(60, 40)));
+                } else {
+                    spawn(new BreekbaarPlatform(new Coordinate2D(x, y)));
+                }
+                platformLocaties.add(nieuweLocatie);
+                platformGeplaatst++;
             }
-            platformGeplaatst++;
         }
+    }
+
+    private boolean isOverlappend(Coordinate2D nieuweLocatie) {
+        for (Coordinate2D locatie : platformLocaties) {
+            if (locatie.distance(nieuweLocatie) < 60) {
+                return true;
+            }
+        }
+        return false;
     }
 }
