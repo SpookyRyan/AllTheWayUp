@@ -29,14 +29,14 @@ public class PlatformSpawner extends EntitySpawner {
 
         while (platformGeplaatst < 10) {
             double x = random.nextDouble() * (sceneWidth - 60 * 2) + 60;
-            double y = random.nextDouble() * sceneHeight;
+            double y = random.nextDouble() * sceneHeight + 10;
             Coordinate2D nieuweLocatie = new Coordinate2D(x, y);
 
             if(!isOverlappend(nieuweLocatie)) {
                 if (random.nextDouble() < 0.7) {
                     spawn(new NormaalPlatform(new Coordinate2D(x, y), new Size(60, 40)));
                 } else {
-                    spawn(new BreekbaarPlatform(new Coordinate2D(x, y)));
+                    spawn(new BreekbaarPlatform(new Coordinate2D(x, y), new Size(60, 40)));
                 }
                 platformLocaties.add(nieuweLocatie);
                 platformGeplaatst++;
