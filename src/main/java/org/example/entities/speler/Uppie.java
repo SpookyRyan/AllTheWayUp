@@ -16,7 +16,7 @@ import org.example.AllTheWayUp;
 import java.util.List;
 import java.util.Set;
 
-public class Uppie extends DynamicSpriteEntity implements Collided, KeyListener, SceneBorderCrossingWatcher {
+public class Uppie extends DynamicSpriteEntity implements Collided, KeyListener, SceneBorderCrossingWatcher, Newtonian {
     private AllTheWayUp game;
     private long vorigeSprongTijd;
     private boolean isInSprong = false;
@@ -25,6 +25,9 @@ public class Uppie extends DynamicSpriteEntity implements Collided, KeyListener,
     public Uppie(Coordinate2D positie, Size grootte, AllTheWayUp game) {
         super("Sprites/Uppie.png", positie, grootte);
         this.game = game;
+
+        setGravityConstant(1);
+        setFrictionConstant(0.3);
     }
 
     @Override
@@ -42,9 +45,6 @@ public class Uppie extends DynamicSpriteEntity implements Collided, KeyListener,
             default:
                 break;
         }
-
-
-
     }
 
     @Override
@@ -53,6 +53,12 @@ public class Uppie extends DynamicSpriteEntity implements Collided, KeyListener,
             setMotion(3,270d);
         } else if(pressedKeys.contains(KeyCode.RIGHT)){
             setMotion(3,90d);
+        } else if(pressedKeys.contains(KeyCode.UP)){
+            setMotion(3,180d);
+        } else if(pressedKeys.contains(KeyCode.DOWN)){
+            setMotion(3,0d);
+        } else {
+            setMotion(0,0d);
         }
     }
 
@@ -60,7 +66,7 @@ public class Uppie extends DynamicSpriteEntity implements Collided, KeyListener,
         long tijd = System.currentTimeMillis();
         long sprongDuur = 1000;
 
-        if (isInSprong == false) {
+        if (!isInSprong) {
             setMotion(1, 0d);
             isInSprong = true;
             vorigeSprongTijd = tijd;
@@ -70,11 +76,12 @@ public class Uppie extends DynamicSpriteEntity implements Collided, KeyListener,
             isInSprong = false;
             vorigeSprongTijd = tijd;
         }
-        
+
     }
 
     @Override
     public void onCollision(List<Collider> list) {
+        setMotion(50,180d);
 
     }
 }

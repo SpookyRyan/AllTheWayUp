@@ -7,6 +7,7 @@ import com.github.hanyaeger.api.scenes.DynamicScene;
 import org.example.AllTheWayUp;
 import org.example.entities.platformen.PlatformSpawner;
 import org.example.entities.speler.Uppie;
+import org.example.entities.speler.Uppie2;
 
 public class SpelLevel extends DynamicScene implements EntitySpawnerContainer {
     private AllTheWayUp game;
@@ -31,6 +32,7 @@ public class SpelLevel extends DynamicScene implements EntitySpawnerContainer {
     @Override
     public void setupEntitySpawners() {
         addEntitySpawner(new PlatformSpawner(10, getWidth(), getHeight()));
+
 
     }
 }
