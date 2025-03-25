@@ -6,11 +6,6 @@ import org.example.scenes.SpelLevel;
 import org.example.scenes.SpelOver;
 import org.example.scenes.VoorPagina;
 
-/**
- * Hello world!
- *
- */
-
 public class AllTheWayUp extends YaegerGame
 {
     public static void main( String[] args ) {
