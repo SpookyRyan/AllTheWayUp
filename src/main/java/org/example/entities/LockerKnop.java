@@ -1,4 +1,10 @@
+package org.example.entities;
+
+<<<<<<<< HEAD:src/main/java/org/example/entities/knop/LockerKnop.java
 package org.example.entities.knop;
+========
+package org.example.entities.knoppen;
+>>>>>>>> origin/Development:src/main/java/org/example/entities/knoppen/LockerKnop.java
 
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.entities.impl.TextEntity;
@@ -12,30 +18,30 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import org.example.AllTheWayUp;
 
-public class StartKnop extends TextEntity implements MouseButtonPressedListener, MouseEnterListener, MouseExitListener {
+public class LockerKnop extends TextEntity implements MouseButtonPressedListener, MouseEnterListener, MouseExitListener {
     private AllTheWayUp game;
 
-    public StartKnop(Coordinate2D initialLocation, AllTheWayUp game){
-        super(initialLocation,"Start Spel");
+    public LockerKnop(Coordinate2D initialLocation, AllTheWayUp game){
+        super(initialLocation,"Locker (Work in Progress)");
         this.game = game;
         setFill(Color.PURPLE);
-        setFont(Font.font("Roboto", FontWeight.BOLD, 30));
+        setFont(Font.font("Roboto", FontWeight.BOLD, 25));
     }
 
     @Override
     public void onMouseButtonPressed(MouseButton button, Coordinate2D coordinate2D){
-        game.setActiveScene(1);
+
     }
 
     @Override
     public void onMouseEntered(){
-        setFill(Color.VIOLET);
+        setFill(Color.DARKRED);
         setCursor(Cursor.HAND);
     }
 
     @Override
     public void onMouseExited(){
-        setFill(Color.PURPLE);
+        setFill(Color.RED);
         setCursor(Cursor.DEFAULT);
     }
 
