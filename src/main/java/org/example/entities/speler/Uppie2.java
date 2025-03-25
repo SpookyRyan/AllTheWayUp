@@ -8,14 +8,16 @@ import com.github.hanyaeger.api.scenes.SceneBorder;
 public class Uppie2 extends DynamicCompositeEntity implements SceneBorderCrossingWatcher {
 
 
-    public Uppie2(Coordinate2D initialLocation, Size size) {
+    public Uppie2(Coordinate2D initialLocation) {
         super(initialLocation);
+
+        setMotion(1, 0D);
     }
 
     @Override
     protected void setupEntities() {
-        addEntity(new UppieSprite(new Coordinate2D(200, 100)));
-        addEntity(new UppieHitBox(new Coordinate2D(200, 100)));
+        addEntity(new UppieSprite(new Coordinate2D(200, 100), new Size(50, 50)));
+        addEntity(new UppieHitBox(new Coordinate2D(200, 145)));
     }
 
     @Override

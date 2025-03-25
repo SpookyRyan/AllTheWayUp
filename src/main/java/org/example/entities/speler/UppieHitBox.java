@@ -11,13 +11,14 @@ import java.util.List;
 public class UppieHitBox extends RectangleEntity implements Collided {
     protected UppieHitBox(Coordinate2D initialLocation) {
         super(initialLocation);
-        setWidth(1);
+        setWidth(50);
         setHeight(1);
         setFill(Color.TRANSPARENT);
     }
 
     @Override
     public void onCollision(List<Collider> list) {
+
 
     }
 }
