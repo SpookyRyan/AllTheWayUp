@@ -3,8 +3,8 @@ package org.example.scenes;
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.scenes.StaticScene;
 import org.example.AllTheWayUp;
-import org.example.entities.LockerKnop;
-import org.example.entities.StartKnop;
+import org.example.entities.knop.LockerKnop;
+import org.example.entities.knop.StartKnop;
 
 
 public class VoorPagina extends StaticScene {

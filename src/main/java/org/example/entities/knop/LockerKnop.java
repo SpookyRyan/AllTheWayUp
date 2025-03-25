@@ -1,4 +1,4 @@
-package org.example.entities;
+package org.example.entities.knop;
 
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.entities.impl.TextEntity;
