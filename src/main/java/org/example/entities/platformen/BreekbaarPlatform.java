@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 
-public class BreekbaarPlatform extends DynamicSpriteEntity implements Collider, Collided {
+public class BreekbaarPlatform extends DynamicSpriteEntity implements Collided {
 
     public BreekbaarPlatform(Coordinate2D initialLocation, Size grootte) {
         super("afbeeldingen/BreekbaarPlatform.png", initialLocation, grootte);
@@ -21,15 +21,11 @@ public class BreekbaarPlatform extends DynamicSpriteEntity implements Collider, 
 
     @Override
     public void onCollision(List<Collider> list) {
-        for(Collider collider : list) {
-            if (collider instanceof Uppie) {
+        for(Collider collider : list){
+            if (collider instanceof Uppie){
                 remove();
             }
         }
-    }
 
-    @Override
-    public Optional<? extends Node> getNode() {
-        return Optional.empty();
     }
 }
