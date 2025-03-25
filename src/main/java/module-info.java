@@ -7,4 +7,5 @@ module All.the.way.UP {
     opens audio;
     opens afbeeldingen;
     opens video;
+    opens Sprites;
 }
