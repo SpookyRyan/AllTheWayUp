@@ -1,8 +1,10 @@
 package org.example.scenes;
 
+import com.github.hanyaeger.api.EntitySpawnerContainer;
 import com.github.hanyaeger.api.scenes.DynamicScene;
+import org.example.entities.platformen.PlatformSpawner;
 
-public class SpelLevel extends DynamicScene {
+public class SpelLevel extends DynamicScene implements EntitySpawnerContainer {
     @Override
     public void setupScene() {
     setBackgroundAudio("audio/SpelLevelMuziek.mp3");
@@ -12,5 +14,10 @@ public class SpelLevel extends DynamicScene {
     @Override
     public void setupEntities() {
 
+    }
+
+    @Override
+    public void setupEntitySpawners() {
+        addEntitySpawner(new PlatformSpawner(100, getWidth(), getHeight()));
     }
 }
