@@ -5,14 +5,11 @@ import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.entities.Collided;
 import com.github.hanyaeger.api.entities.Collider;
 import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
-import com.github.hanyaeger.api.entities.impl.SpriteEntity;
 import javafx.scene.Node;
 import org.example.entities.speler.Uppie;
 
 import java.util.List;
 import java.util.Optional;
-
-import static jdk.jfr.internal.JDKEvents.remove;
 
 
 public class BreekbaarPlatform extends DynamicSpriteEntity implements Collider, Collided {
