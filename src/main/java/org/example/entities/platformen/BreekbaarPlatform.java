@@ -15,7 +15,7 @@ import java.util.Optional;
 public class BreekbaarPlatform extends DynamicSpriteEntity implements Collider, Collided {
 
     public BreekbaarPlatform(Coordinate2D location) {
-        super("abeeldingen/BreekbaarPlatform.png", location, new Size(60, 40));
+        super("afbeeldingen/BreekbaarPlatform.png", location, new Size(60, 40));
 
     }
 
