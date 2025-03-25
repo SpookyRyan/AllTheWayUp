@@ -3,7 +3,6 @@ package org.example.entities.platformen;
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.entities.EntitySpawner;
-import javafx.application.Platform;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,8 +34,10 @@ public class PlatformSpawner extends EntitySpawner {
             if(!isOverlappend(nieuweLocatie)) {
                 if (random.nextDouble() < 0.7) {
                     spawn(new NormaalPlatform(new Coordinate2D(x, y), new Size(60, 40)));
+                    spawn(new PlatformHitBox(new Coordinate2D(x, y)));
                 } else {
                     spawn(new BreekbaarPlatform(new Coordinate2D(x, y), new Size(60, 40)));
+                    spawn(new PlatformHitBox(new Coordinate2D(x, y)));
                 }
                 platformLocaties.add(nieuweLocatie);
                 platformGeplaatst++;
