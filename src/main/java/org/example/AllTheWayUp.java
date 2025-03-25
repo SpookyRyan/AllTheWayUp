@@ -22,7 +22,7 @@ public class AllTheWayUp extends YaegerGame
     @Override
     public void setupScenes() {
         addScene(0, new VoorPagina(this));
-        addScene(1, new SpelLevel());
+        addScene(1, new SpelLevel(this));
         addScene(2, new SpelOver());
     }
 }

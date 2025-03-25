@@ -2,6 +2,7 @@ package org.example.entities.speler;
 
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.Size;
+import com.github.hanyaeger.api.YaegerGame;
 import com.github.hanyaeger.api.entities.Collided;
 import com.github.hanyaeger.api.entities.Collider;
 import com.github.hanyaeger.api.entities.Newtonian;
@@ -10,21 +11,27 @@ import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
 import com.github.hanyaeger.api.scenes.SceneBorder;
 import com.github.hanyaeger.api.userinput.KeyListener;
 import javafx.scene.input.KeyCode;
+import org.example.AllTheWayUp;
 
 import java.util.List;
 import java.util.Set;
 
 public class Uppie extends DynamicSpriteEntity implements Collided, KeyListener, SceneBorderCrossingWatcher {
+    private AllTheWayUp game;
     private long vorigeSprongTijd;
     private boolean isInSprong = false;
 
 
-    public Uppie(Coordinate2D positie, Size grootte) {
+    public Uppie(Coordinate2D positie, Size grootte, AllTheWayUp game) {
         super("Sprites/Uppie.png", positie, grootte);
+        this.game = game;
     }
 
     @Override
     public void notifyBoundaryCrossing(SceneBorder sceneBorder) {
+        if (sceneBorder == SceneBorder.BOTTOM) {
+            game.setActiveScene(2);
+        }
 
     }
 
@@ -42,15 +49,18 @@ public class Uppie extends DynamicSpriteEntity implements Collided, KeyListener,
     public void AutomatischSpringen(){
         long tijd = System.currentTimeMillis();
         long sprongDuur = 1000;
-        if (!isInSprong) {
-            setMotion(10, 0d);
+
+        if (isInSprong == false) {
+            setMotion(1, 0d);
             isInSprong = true;
             vorigeSprongTijd = tijd;
-        } else if(tijd - vorigeSprongTijd > sprongDuur) {
-            setMotion(10, 180d);
+        }
+        else if(tijd - vorigeSprongTijd > sprongDuur) {
+            setMotion(10, 0d);
             isInSprong = false;
             vorigeSprongTijd = tijd;
         }
+        
     }
 
     @Override
