@@ -9,16 +9,16 @@ import org.example.entities.platformen.PlatformSpawner;
 import org.example.entities.speler.Uppie;
 import org.example.entities.speler.Uppie2;
 
-public class SpelLevel extends DynamicScene implements EntitySpawnerContainer {
+public class GameLevel extends DynamicScene implements EntitySpawnerContainer {
     private AllTheWayUp game;
 
-    public SpelLevel(AllTheWayUp game) {
+    public GameLevel(AllTheWayUp game) {
         this.game = game;
     }
 
     @Override
     public void setupScene() {
-    setBackgroundAudio("audio/SpelLevelMuziek.mp3");
+    setBackgroundAudio("audio/GameLevelTheme.mp3");
     setBackgroundAudioVolume(0.3);
     }
 

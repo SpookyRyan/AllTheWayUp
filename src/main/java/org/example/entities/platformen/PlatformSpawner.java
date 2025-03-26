@@ -33,10 +33,10 @@ public class PlatformSpawner extends EntitySpawner {
 
             if(!isOverlappend(nieuweLocatie)) {
                 if (random.nextDouble() < 0.7) {
-                    spawn(new NormaalPlatform(new Coordinate2D(x, y), new Size(60, 40)));
+                    spawn(new NormalPlatform(new Coordinate2D(x, y), new Size(60, 40)));
                     spawn(new PlatformHitBox(new Coordinate2D(x, y)));
                 } else {
-                    spawn(new BreekbaarPlatform(new Coordinate2D(x, y), new Size(60, 40)));
+                    spawn(new BrokenPlatform(new Coordinate2D(x, y), new Size(60, 40)));
                     spawn(new PlatformHitBox(new Coordinate2D(x, y)));
                 }
                 platformLocaties.add(nieuweLocatie);

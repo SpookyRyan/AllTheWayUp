@@ -7,18 +7,18 @@ import org.example.entities.knoppen.LockerKnop;
 import org.example.entities.knoppen.StartKnop;
 
 
-public class VoorPagina extends StaticScene {
+public class MenuScene extends StaticScene {
     private AllTheWayUp game;
 
-    public VoorPagina(AllTheWayUp game) {
+    public MenuScene(AllTheWayUp game) {
         this.game = game;
     }
 
     @Override
     public void setupScene() {
-        setBackgroundAudio("audio/MainMenuMuziek.mp3");
+        setBackgroundAudio("audio/MainMenuTheme.mp3");
         setBackgroundAudioVolume(0.3);
-        setBackgroundImage("afbeeldingen/cover.png");
+        setBackgroundImage("images/cover.png");
     }
 
     @Override

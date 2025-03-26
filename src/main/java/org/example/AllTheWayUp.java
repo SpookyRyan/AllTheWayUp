@@ -2,9 +2,9 @@ package org.example;
 
 import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.YaegerGame;
-import org.example.scenes.SpelLevel;
-import org.example.scenes.SpelOver;
-import org.example.scenes.VoorPagina;
+import org.example.scenes.GameLevel;
+import org.example.scenes.GameOver;
+import org.example.scenes.MenuScene;
 
 public class AllTheWayUp extends YaegerGame
 {
@@ -21,8 +21,8 @@ public class AllTheWayUp extends YaegerGame
 
     @Override
     public void setupScenes() {
-        addScene(0, new VoorPagina(this));
-        addScene(1, new SpelLevel(this));
-        addScene(2, new SpelOver());
+        addScene(0, new MenuScene(this));
+        addScene(1, new GameLevel(this));
+        addScene(2, new GameOver());
     }
 }

@@ -7,7 +7,7 @@ module All.the.way.UP {
     exports org.example;
 
     opens audio;
-    opens afbeeldingen;
+    opens images;
     opens video;
     opens Sprites;
 }
