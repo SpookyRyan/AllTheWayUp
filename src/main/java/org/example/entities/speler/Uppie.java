@@ -99,7 +99,6 @@ public class Uppie extends DynamicSpriteEntity implements Collided, KeyListener,
     @Override
     public void onCollision(List<Collider> list) {
         Beweeg();
-
     }
 
 
