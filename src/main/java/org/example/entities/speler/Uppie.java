@@ -49,8 +49,8 @@ public class Uppie extends DynamicSpriteEntity implements Collided, KeyListener,
                 break;
             case RIGHT:
                 setAnchorLocationX(-30);
-            default:
                 break;
+            default:
         }
     }
 
