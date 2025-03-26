@@ -24,8 +24,8 @@ public class Uppie extends DynamicSpriteEntity implements Collided, KeyListener,
     private double currentGravity = 0;
     private boolean isInJump = false;
     private boolean isCollided = false;
-    private final double jumpStartGravity = -4;  // <-- krachtiger omhoog
-    private final double maxGravity = 2;     // <-- max valversnelling
+    private final double jumpStartGravity = -4;
+    private final double maxGravity = 2;
     private final double gravityStep = 0.1;
 
 
