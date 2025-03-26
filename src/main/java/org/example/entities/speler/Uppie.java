@@ -13,11 +13,13 @@ import com.github.hanyaeger.api.userinput.KeyListener;
 import javafx.scene.input.KeyCode;
 import org.example.AllTheWayUp;
 import org.example.entities.platformen.Platform;
+import com.github.hanyaeger.api.TimerContainer;
+import com.github.hanyaeger.api.Timer;
 
 import java.util.List;
 import java.util.Set;
 
-public class Uppie extends DynamicSpriteEntity implements Collided, KeyListener, SceneBorderCrossingWatcher, Newtonian{
+public class Uppie extends DynamicSpriteEntity implements Collided, KeyListener, SceneBorderCrossingWatcher, Newtonian, TimerContainer{
     private AllTheWayUp game;
     private long vorigeSprongTijd;
     private boolean isInSprong = false;
@@ -83,6 +85,17 @@ public class Uppie extends DynamicSpriteEntity implements Collided, KeyListener,
 //
 //    }
 
+
+    @Override
+    public void setupTimers() {
+        addTimer(new Timer(100) {
+            @Override
+            public void onAnimationUpdate(long timestamp) {
+                Beweeg();
+            }
+        });
+    }
+
     @Override
     public void onCollision(List<Collider> list) {
         Beweeg();
@@ -92,7 +105,7 @@ public class Uppie extends DynamicSpriteEntity implements Collided, KeyListener,
 
     public void Beweeg() {
                 setGravityConstant(-1);
-
+        System.out.println("joepie");
 //                setGravityConstant(1);
 
     }
