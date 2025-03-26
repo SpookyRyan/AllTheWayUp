@@ -28,7 +28,7 @@ public class SpelLevel extends DynamicScene implements EntitySpawnerContainer {
         Uppie2 uppie2 = new Uppie2(new Coordinate2D(100, 100));
         addEntity(uppie);
         addEntity(uppie2);
-        uppie.AutomatischSpringen();
+//        uppie.AutomatischSpringen();
     }
 
     @Override
