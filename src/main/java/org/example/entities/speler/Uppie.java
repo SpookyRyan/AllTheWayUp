@@ -16,10 +16,11 @@ import org.example.AllTheWayUp;
 import java.util.List;
 import java.util.Set;
 
-public class Uppie extends DynamicSpriteEntity implements Collided, KeyListener, SceneBorderCrossingWatcher, Newtonian {
+public class Uppie extends DynamicSpriteEntity implements Collided, KeyListener, SceneBorderCrossingWatcher, Newtonian{
     private AllTheWayUp game;
     private long vorigeSprongTijd;
     private boolean isInSprong = false;
+    private Long springStartTime = null;
 
 
     public Uppie(Coordinate2D positie, Size grootte, AllTheWayUp game) {
@@ -47,6 +48,8 @@ public class Uppie extends DynamicSpriteEntity implements Collided, KeyListener,
         }
     }
 
+
+
     @Override
     public void onPressedKeysChange(Set<KeyCode> pressedKeys){
         if(pressedKeys.contains(KeyCode.LEFT)){
@@ -62,26 +65,34 @@ public class Uppie extends DynamicSpriteEntity implements Collided, KeyListener,
         }
     }
 
-    public void AutomatischSpringen(){
-        long tijd = System.currentTimeMillis();
-        long sprongDuur = 1000;
-
-        if (!isInSprong) {
-            setMotion(1, 0d);
-            isInSprong = true;
-            vorigeSprongTijd = tijd;
-        }
-        else if(tijd - vorigeSprongTijd > sprongDuur) {
-            setMotion(10, 0d);
-            isInSprong = false;
-            vorigeSprongTijd = tijd;
-        }
-
-    }
+//    public void AutomatischSpringen(){
+//        long tijd = System.currentTimeMillis();
+//        long sprongDuur = 1000;
+//
+//        if (!isInSprong) {
+//            setMotion(1, 0d);
+//            isInSprong = true;
+//            vorigeSprongTijd = tijd;
+//        }
+//        else if(tijd - vorigeSprongTijd > sprongDuur) {
+//            setMotion(10, 0d);
+//            isInSprong = false;
+//            vorigeSprongTijd = tijd;
+//        }
+//
+//    }
 
     @Override
     public void onCollision(List<Collider> list) {
-        setMotion(50,180d);
+        Beweeg();
+
+    }
+
+
+    public void Beweeg() {
+                setGravityConstant(-1);
+
+//                setGravityConstant(1);
 
     }
 
