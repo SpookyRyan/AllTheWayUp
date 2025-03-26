@@ -12,7 +12,8 @@ import java.util.List;
 import java.util.Optional;
 
 
-public class BreekbaarPlatform extends DynamicSpriteEntity implements Collided {
+public class
+BreekbaarPlatform extends Platform implements Collided {
 
     public BreekbaarPlatform(Coordinate2D initialLocation, Size grootte) {
         super("afbeeldingen/BreekbaarPlatform.png", initialLocation, grootte);
@@ -27,8 +28,4 @@ public class BreekbaarPlatform extends DynamicSpriteEntity implements Collided {
             }
         }
     }
-/*
-    public void moveDown() {
-    }
-*/
 }

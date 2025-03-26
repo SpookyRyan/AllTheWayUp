@@ -12,6 +12,7 @@ import com.github.hanyaeger.api.scenes.SceneBorder;
 import com.github.hanyaeger.api.userinput.KeyListener;
 import javafx.scene.input.KeyCode;
 import org.example.AllTheWayUp;
+import org.example.entities.platformen.Platform;
 
 import java.util.List;
 import java.util.Set;
@@ -100,13 +101,16 @@ public class Uppie extends DynamicSpriteEntity implements Collided, KeyListener,
         return (int) getAnchorLocation().getY();
     }
 
-    public void checkOfUppieBovenLimitIs(){
+    public void checkOfUppieBovenLimitIs(List<Collider> list){ //kan nog wel een betere naam krijgen
         double uppieY = getY();
         double limit = getHeight() - getHeight() / 3;
 
         if(uppieY < limit){
             double verschil = limit - uppieY;
-            // platform y --
+            for(Collider collider : list)
+                if(collider instanceof Platform){
+                    ((Platform) collider).moveDown(verschil);
+                }
         }
     }
 }

@@ -7,7 +7,7 @@ import com.github.hanyaeger.api.entities.Collider;
 import com.github.hanyaeger.api.entities.impl.SpriteEntity;
 
 
-public class NormaalPlatform extends SpriteEntity {
+public class NormaalPlatform extends Platform {
     public NormaalPlatform(Coordinate2D initialLocation, Size grootte) {
         super("afbeeldingen/grasplatform.png", initialLocation, grootte);
     }
