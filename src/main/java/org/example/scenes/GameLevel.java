@@ -24,10 +24,10 @@ public class GameLevel extends DynamicScene implements EntitySpawnerContainer {
 
     @Override
     public void setupEntities() {
-        Uppie uppie = new Uppie(new Coordinate2D(100, 100), new Size(50, 50), game);
-        Uppie2 uppie2 = new Uppie2(new Coordinate2D(100, 100));
+        Uppie uppie = new Uppie(new Coordinate2D(250, 700), new Size(50, 50), game);
+//        Uppie2 uppie2 = new Uppie2(new Coordinate2D(100, 100));
         addEntity(uppie);
-        addEntity(uppie2);
+//        addEntity(uppie2);
 //        uppie.AutomatischSpringen();
     }
 
