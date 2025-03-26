@@ -84,4 +84,18 @@ public class Uppie extends DynamicSpriteEntity implements Collided, KeyListener,
         setMotion(50,180d);
 
     }
+
+    public int getY(){
+        return (int) getAnchorLocation().getY();
+    }
+
+    public void checkOfUppieBovenLimitIs(){
+        double uppieY = getY();
+        double limit = getHeight() - getHeight() / 3;
+
+        if(uppieY < limit){
+            double verschil = limit - uppieY;
+            // platform y --
+        }
+    }
 }

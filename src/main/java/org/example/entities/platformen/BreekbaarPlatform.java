@@ -26,6 +26,9 @@ public class BreekbaarPlatform extends DynamicSpriteEntity implements Collided {
                 remove();
             }
         }
-
     }
+/*
+    public void moveDown() {
+    }
+*/
 }
