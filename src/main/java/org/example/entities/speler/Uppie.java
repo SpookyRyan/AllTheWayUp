@@ -18,15 +18,16 @@ import com.github.hanyaeger.api.Timer;
 import java.util.List;
 import java.util.Set;
 
-public class Uppie extends DynamicSpriteEntity implements Collided, KeyListener, SceneBorderCrossingWatcher, Newtonian, TimerContainer{
+public class Uppie extends DynamicSpriteEntity implements Collided, Collider, KeyListener, SceneBorderCrossingWatcher, Newtonian, TimerContainer{
     private final AllTheWayUp game;;
     long prevMillis;
     private double currentGravity = 0;
     private boolean isInJump = false;
     private boolean isCollided = false;
-    private final double jumpStartGravity = -4;
+    private final double jumpStartGravity = -2.7;
     private final double maxGravity = 2;
     private final double gravityStep = 0.1;
+
 
 
     public Uppie(Coordinate2D positie, Size grootte, AllTheWayUp game) {
@@ -59,15 +60,9 @@ public class Uppie extends DynamicSpriteEntity implements Collided, KeyListener,
     @Override
     public void onPressedKeysChange(Set<KeyCode> pressedKeys){
         if(pressedKeys.contains(KeyCode.LEFT)){
-            setMotion(3,270d);
-        } else if(pressedKeys.contains(KeyCode.RIGHT)){
-            setMotion(3,90d);
-        } else if(pressedKeys.contains(KeyCode.UP)){
-            setMotion(3,180d);
-        } else if(pressedKeys.contains(KeyCode.DOWN)){
-            setMotion(3,0d);
-        } else {
-            setMotion(0,0d);
+            addToMotion(0.7,270d);
+        } else if(pressedKeys.contains(KeyCode.RIGHT)) {
+            addToMotion(0.7, 90d);
         }
     }
 

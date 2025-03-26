@@ -15,6 +15,7 @@ public class PlatformSpawner extends EntitySpawner {
     private final Random random;
     private int platformGeplaatst = 0;
     private final List<Coordinate2D> platformLocaties = new ArrayList<>();
+    private int amountOfPlatforms = 15;
 
     public PlatformSpawner(long intervalInMs, double sceneWidth, double sceneHeight) {
         super(intervalInMs);
@@ -26,7 +27,7 @@ public class PlatformSpawner extends EntitySpawner {
     @Override
     protected void spawnEntities() {
 
-        while (platformGeplaatst < 10) {
+        while (platformGeplaatst < amountOfPlatforms) {
             double x = random.nextDouble() * (sceneWidth - 60 * 2) + 60;
             double y = random.nextDouble() * sceneHeight + 10;
             Coordinate2D nieuweLocatie = new Coordinate2D(x, y);
@@ -34,10 +35,10 @@ public class PlatformSpawner extends EntitySpawner {
             if(!isOverlappend(nieuweLocatie)) {
                 if (random.nextDouble() < 0.7) {
                     spawn(new NormalPlatform(new Coordinate2D(x, y), new Size(60, 40)));
-                    spawn(new PlatformHitBox(new Coordinate2D(x, y)));
+                    spawn(new PlatformHitBox(new Coordinate2D(x, y), "Normal"));
                 } else {
-                    spawn(new BrokenPlatform(new Coordinate2D(x, y), new Size(60, 40)));
-                    spawn(new PlatformHitBox(new Coordinate2D(x, y)));
+                    spawn(new BrokenPlatform(new Coordinate2D(x, y), new Size(60, 40), platformGeplaatst));
+//                    spawn(new PlatformHitBox(new Coordinate2D(x, y), "Broken"));
                 }
                 platformLocaties.add(nieuweLocatie);
                 platformGeplaatst++;
