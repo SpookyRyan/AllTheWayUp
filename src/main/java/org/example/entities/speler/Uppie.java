@@ -2,7 +2,6 @@ package org.example.entities.speler;
 
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.Size;
-import com.github.hanyaeger.api.YaegerGame;
 import com.github.hanyaeger.api.entities.Collided;
 import com.github.hanyaeger.api.entities.Collider;
 import com.github.hanyaeger.api.entities.Newtonian;
@@ -20,10 +19,14 @@ import java.util.List;
 import java.util.Set;
 
 public class Uppie extends DynamicSpriteEntity implements Collided, KeyListener, SceneBorderCrossingWatcher, Newtonian, TimerContainer{
-    private AllTheWayUp game;
-    private long vorigeSprongTijd;
-    private boolean isInSprong = false;
-    private Long springStartTime = null;
+    private final AllTheWayUp game;;
+    long prevMillis;
+    private double currentGravity = 0;
+    private boolean isInJump = false;
+    private boolean isCollided = false;
+    private final double jumpStartGravity = -4;  // <-- krachtiger omhoog
+    private final double maxGravity = 2;     // <-- max valversnelling
+    private final double gravityStep = 0.1;
 
 
     public Uppie(Coordinate2D positie, Size grootte, AllTheWayUp game) {
@@ -68,47 +71,49 @@ public class Uppie extends DynamicSpriteEntity implements Collided, KeyListener,
         }
     }
 
-//    public void AutomatischSpringen(){
-//        long tijd = System.currentTimeMillis();
-//        long sprongDuur = 1000;
-//
-//        if (!isInSprong) {
-//            setMotion(1, 0d);
-//            isInSprong = true;
-//            vorigeSprongTijd = tijd;
-//        }
-//        else if(tijd - vorigeSprongTijd > sprongDuur) {
-//            setMotion(10, 0d);
-//            isInSprong = false;
-//            vorigeSprongTijd = tijd;
-//        }
-//
-//    }
-
-
     @Override
     public void setupTimers() {
-        addTimer(new Timer(100) {
+        addTimer(new Timer(10) {
             @Override
             public void onAnimationUpdate(long timestamp) {
-                Beweeg();
+                jumpAutomatically();
             }
         });
     }
 
     @Override
     public void onCollision(List<Collider> list) {
-        Beweeg();
+        if (!isInJump) {
+            isCollided = true;
+        }
+//        System.out.println("joepie");
 
     }
 
 
-    public void Beweeg() {
-                setGravityConstant(-1);
-        System.out.println("joepie");
-//                setGravityConstant(1);
+    public void jumpAutomatically() {
+        long millis = System.currentTimeMillis();
 
+        if (isCollided && !isInJump) {
+            currentGravity = jumpStartGravity;
+            setGravityConstant(currentGravity);
+            prevMillis = millis;
+            isInJump = true;
+            isCollided = false;
+        }
+        if (currentGravity < maxGravity) {
+            currentGravity += gravityStep;
+            setGravityConstant(currentGravity);
+
+            if (currentGravity > 0) {
+//                System.out.println("joepie");
+                isInJump = false;
+            }
+        }
     }
+
+
+
 
     public int getY(){
         return (int) getAnchorLocation().getY();
