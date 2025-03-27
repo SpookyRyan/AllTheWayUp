@@ -19,7 +19,7 @@ BrokenPlatform extends Platform implements Collided, Collider {
     @Override
     public void onCollision(List<Collider> list) {
         for(Collider collider : list){
-            if (collider instanceof Uppie){
+            if (collider instanceof Uppie && !Uppie.getIsInJump()){
                 remove();
                 setRemoved();
             }
