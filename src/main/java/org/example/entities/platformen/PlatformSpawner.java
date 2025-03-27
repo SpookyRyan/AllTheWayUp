@@ -78,7 +78,7 @@ public class PlatformSpawner extends EntitySpawner {
 
     private boolean isOverlappend(Coordinate2D nieuweLocatie) {
         for (Coordinate2D locatie : platformLocaties) {
-            if (locatie.distance(nieuweLocatie) < 140) {
+            if (locatie.distance(nieuweLocatie) < 120) {
                 return true;
             }
         }

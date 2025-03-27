@@ -23,6 +23,6 @@ public class AllTheWayUp extends YaegerGame
     public void setupScenes() {
         addScene(0, new MenuScene(this));
         addScene(1, new GameLevel(this));
-        addScene(2, new GameOver());
+        addScene(2, new GameOver(this));
     }
 }
