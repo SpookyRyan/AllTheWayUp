@@ -11,12 +11,9 @@ import java.util.List;
 
 public class
 BrokenPlatform extends Platform implements Collided, Collider {
-    private int platformsPlaced;
 
     public BrokenPlatform(Coordinate2D initialLocation, Size size, int platformsPlaced) {
         super("images/BrokenPlatform.png", initialLocation, size);
-        this.platformsPlaced = platformsPlaced;
-
     }
 
     @Override
@@ -24,7 +21,6 @@ BrokenPlatform extends Platform implements Collided, Collider {
         for(Collider collider : list){
             if (collider instanceof Uppie){
                 remove();
-                platformsPlaced--;
             }
         }
     }

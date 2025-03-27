@@ -27,12 +27,15 @@ public class Uppie extends DynamicSpriteEntity implements Collided, Collider, Ke
     private final double jumpStartGravity = -2.7;
     private final double maxGravity = 2;
     private final double gravityStep = 0.1;
+    private List<Collider> platforms;
+    private double vorigeY;
 
 
 
     public Uppie(Coordinate2D positie, Size grootte, AllTheWayUp game) {
         super("Sprites/Uppie.png", positie, grootte);
         this.game = game;
+        this.vorigeY = positie.getY();
 
         setGravityConstant(1);
         setFrictionConstant(0.3);
@@ -105,25 +108,34 @@ public class Uppie extends DynamicSpriteEntity implements Collided, Collider, Ke
                 isInJump = false;
             }
         }
+
+        checkOfUppieBovenLimitIs(platforms);
     }
 
 
-
+    public void setPlatforms(List<Collider> platforms) {
+        this.platforms = platforms;
+    }
 
     public int getY(){
         return (int) getAnchorLocation().getY();
     }
 
-    public void checkOfUppieBovenLimitIs(List<Collider> list){ //kan nog wel een betere naam krijgen
-        double uppieY = getY();
-        double limit = getHeight() - getHeight() / 3;
+    public void checkOfUppieBovenLimitIs(List<Collider> list){
+        if (list == null) return;
 
-        if(uppieY < limit){
-            double verschil = limit - uppieY;
-            for(Collider collider : list)
-                if(collider instanceof Platform){
+        double uppieY = getY();
+        double limit = 300;
+
+        if (uppieY < limit && uppieY < vorigeY) {
+            double verschil = vorigeY - uppieY;
+
+            for (Collider collider : list) {
+                if (collider instanceof Platform) {
                     ((Platform) collider).moveDown(verschil);
                 }
+            }
         }
+        vorigeY = uppieY;
     }
 }

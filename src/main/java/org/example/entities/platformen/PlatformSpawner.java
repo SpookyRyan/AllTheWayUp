@@ -2,6 +2,7 @@ package org.example.entities.platformen;
 
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.Size;
+import com.github.hanyaeger.api.entities.Collider;
 import com.github.hanyaeger.api.entities.EntitySpawner;
 
 import java.util.ArrayList;
@@ -17,12 +18,14 @@ public class PlatformSpawner extends EntitySpawner {
     private final List<Coordinate2D> platformLocaties = new ArrayList<>();
     private int amountOfPlatforms = 15;
     private boolean startOfGame = true;
+    private final List<Collider> platformenLijst;
 
-    public PlatformSpawner(long intervalInMs, double sceneWidth, double sceneHeight) {
+    public PlatformSpawner(long intervalInMs, double sceneWidth, double sceneHeight, List<Collider> platformenLijst) {
         super(intervalInMs);
         this.sceneWidth = sceneWidth;
         this.sceneHeight = sceneHeight;
         this.random = new Random();
+        this.platformenLijst = platformenLijst;
     }
 
     @Override
@@ -32,8 +35,16 @@ public class PlatformSpawner extends EntitySpawner {
         if (startOfGame) {
             for (int x = 0; x <= sceneWidth; x += 60) {
                 Coordinate2D locatie = new Coordinate2D(x, sceneHeight - 20);
-                spawn(new NormalPlatform(locatie, new Size(60, 40)));
-                spawn(new PlatformHitBox(locatie, "Normal"));
+
+                NormalPlatform platform = new NormalPlatform(locatie, new Size(60, 40));
+                spawn(platform);
+                platformenLijst.add(platform);
+
+                PlatformHitBox hitbox = new PlatformHitBox(locatie, "Normal");
+                platform.setHitbox(hitbox);
+                spawn(hitbox);
+
+
             }
             startOfGame = false;
         }
@@ -46,11 +57,18 @@ public class PlatformSpawner extends EntitySpawner {
 
             if(!isOverlappend(nieuweLocatie)) {
                 if (random.nextDouble() < 0.8) {
-                    spawn(new NormalPlatform(new Coordinate2D(x, y), new Size(60, 40)));
-                    spawn(new PlatformHitBox(new Coordinate2D(x, y), "Normal"));
+                    NormalPlatform platform = new NormalPlatform(nieuweLocatie, new Size(60, 40));
+                    spawn(platform);
+                    platformenLijst.add(platform);
+
+                    PlatformHitBox hitbox = new PlatformHitBox(nieuweLocatie, "Normal");
+                    platform.setHitbox(hitbox);
+                    spawn(hitbox);
+
                 } else {
-                    spawn(new BrokenPlatform(new Coordinate2D(x, y), new Size(60, 40), platformGeplaatst));
-//                    spawn(new PlatformHitBox(new Coordinate2D(x, y), "Broken"));
+                    BrokenPlatform platform = new BrokenPlatform(nieuweLocatie, new Size(60, 40), platformGeplaatst);
+                    spawn(platform);
+                    platformenLijst.add(platform);
                 }
                 platformLocaties.add(nieuweLocatie);
                 platformGeplaatst++;
@@ -60,7 +78,7 @@ public class PlatformSpawner extends EntitySpawner {
 
     private boolean isOverlappend(Coordinate2D nieuweLocatie) {
         for (Coordinate2D locatie : platformLocaties) {
-            if (locatie.distance(nieuweLocatie) < 120) {
+            if (locatie.distance(nieuweLocatie) < 140) {
                 return true;
             }
         }
