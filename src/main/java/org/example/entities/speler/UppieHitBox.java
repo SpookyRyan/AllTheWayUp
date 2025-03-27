@@ -8,7 +8,9 @@ import javafx.scene.paint.Color;
 
 import java.util.List;
 
-public class UppieHitBox extends RectangleEntity implements Collided {
+public class UppieHitBox extends RectangleEntity implements Collided, Collider {
+    private static boolean isCollided = false;
+
     protected UppieHitBox(Coordinate2D initialLocation) {
         super(initialLocation);
         setWidth(50);
@@ -18,7 +20,17 @@ public class UppieHitBox extends RectangleEntity implements Collided {
 
     @Override
     public void onCollision(List<Collider> list) {
+        if (!Uppie2.getIsInJump()) {
+            isCollided = true;
+        }
 
+    }
 
+    public static void setIsCollided(boolean value){
+        isCollided = value;
+    }
+
+    public static boolean getIsCollided(){
+        return isCollided;
     }
 }

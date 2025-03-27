@@ -7,7 +7,7 @@ import com.github.hanyaeger.api.entities.Collider;
 import com.github.hanyaeger.api.scenes.DynamicScene;
 import org.example.AllTheWayUp;
 import org.example.entities.platformen.PlatformSpawner;
-import org.example.entities.speler.Uppie;
+//import org.example.entities.speler.Uppie;
 import org.example.entities.speler.Uppie2;
 
 import java.util.ArrayList;
@@ -29,9 +29,13 @@ public class GameLevel extends DynamicScene implements EntitySpawnerContainer {
 
     @Override
     public void setupEntities() {
-        Uppie uppie = new Uppie(new Coordinate2D(250, 700), new Size(50, 50), game);
-        uppie.setPlatforms(platformenLijst);
-        addEntity(uppie);
+//        Uppie uppie = new Uppie(new Coordinate2D(250, 700), new Size(50, 50), game);
+//        uppie.setPlatforms(platformenLijst);
+//        addEntity(uppie);
+
+        Uppie2 uppie2 = new Uppie2(new Coordinate2D(250, 700), game);
+        uppie2.setPlatforms(platformenLijst);
+        addEntity(uppie2);
 
     }
 
