@@ -31,7 +31,6 @@ public class PlatformSpawner extends EntitySpawner {
     @Override
     protected void spawnEntities() {
 
-
         if (startOfGame) {
             for (int x = 0; x <= sceneWidth; x += 60) {
                 Coordinate2D locatie = new Coordinate2D(x, sceneHeight - 20);
@@ -84,4 +83,7 @@ public class PlatformSpawner extends EntitySpawner {
         }
         return false;
     }
+
+
+
 }
