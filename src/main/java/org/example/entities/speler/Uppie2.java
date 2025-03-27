@@ -4,8 +4,12 @@ import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.entities.*;
 import com.github.hanyaeger.api.scenes.SceneBorder;
+import com.github.hanyaeger.api.userinput.KeyListener;
+import javafx.scene.input.KeyCode;
 
-public class Uppie2 extends DynamicCompositeEntity implements SceneBorderCrossingWatcher {
+import java.util.Set;
+
+public class Uppie2 extends DynamicCompositeEntity implements SceneBorderCrossingWatcher, KeyListener {
 
 
     public Uppie2(Coordinate2D initialLocation) {
@@ -23,5 +27,14 @@ public class Uppie2 extends DynamicCompositeEntity implements SceneBorderCrossin
     @Override
     public void notifyBoundaryCrossing(SceneBorder sceneBorder) {
 
+    }
+
+    @Override
+    public void onPressedKeysChange(Set<KeyCode> pressedKeys){
+        if(pressedKeys.contains(KeyCode.LEFT)){
+            addToMotion(0.7,270d);
+        } else if(pressedKeys.contains(KeyCode.RIGHT)) {
+            addToMotion(0.7, 90d);
+        }
     }
 }
