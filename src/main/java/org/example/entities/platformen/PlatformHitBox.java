@@ -3,13 +3,16 @@ package org.example.entities.platformen;
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.entities.Collided;
 import com.github.hanyaeger.api.entities.Collider;
+import com.github.hanyaeger.api.entities.SceneBorderCrossingWatcher;
 import com.github.hanyaeger.api.entities.impl.RectangleEntity;
+import com.github.hanyaeger.api.scenes.SceneBorder;
+import com.github.hanyaeger.core.entities.motion.MotionApplier;
 import javafx.scene.paint.Color;
 import org.example.entities.speler.Uppie;
 
 import java.util.List;
 
-public class PlatformHitBox extends RectangleEntity implements Collider, Collided {
+public class PlatformHitBox extends RectangleEntity implements Collider, Collided, SceneBorderCrossingWatcher {
     private String platformType;
 
     protected PlatformHitBox(Coordinate2D initialLocation, String platformType) {
@@ -28,5 +31,22 @@ public class PlatformHitBox extends RectangleEntity implements Collider, Collide
                 remove();
             }
         }
+    }
+
+    @Override
+    public void notifyBoundaryCrossing(SceneBorder sceneBorder) {
+        if(sceneBorder.equals(SceneBorder.BOTTOM)) {
+            remove();
+        }
+    }
+
+    @Override
+    public void setMotionApplier(MotionApplier motionApplier) {
+
+    }
+
+    @Override
+    public MotionApplier getMotionApplier() {
+        return null;
     }
 }

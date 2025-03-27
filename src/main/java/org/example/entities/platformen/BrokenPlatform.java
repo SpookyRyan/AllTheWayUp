@@ -22,6 +22,7 @@ public class BrokenPlatform extends Platform implements Collided, Collider {
         for(Collider collider : list){
             if (collider instanceof UppieHitBox && !Uppie2.getIsInJump()){
                 remove();
+                setRemoved();
             }
         }
     }
