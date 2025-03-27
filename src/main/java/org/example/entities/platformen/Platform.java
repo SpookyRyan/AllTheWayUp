@@ -9,10 +9,12 @@ import com.github.hanyaeger.api.scenes.SceneBorder;
 
 public class Platform extends DynamicSpriteEntity implements Collider, SceneBorderCrossingWatcher {
     private PlatformHitBox hitbox;
+    private boolean removed = false;
+    private Coordinate2D locatie;
 
     public Platform(String afbeelding, Coordinate2D initialLocation, Size grootte) {
         super(afbeelding, initialLocation, grootte);
-
+        this.locatie = initialLocation;
     }
 
     public void moveDown(double hoeveelheid) {
@@ -27,11 +29,24 @@ public class Platform extends DynamicSpriteEntity implements Collider, SceneBord
         this.hitbox = hitbox;
     }
 
+    public boolean isRemoved() {
+        return removed;
+    }
+
+    public void setRemoved() {
+        this.removed = true;
+    }
+
+    public Coordinate2D getLocatie() {
+        return locatie;
+    }
 
     @Override
     public void notifyBoundaryCrossing(SceneBorder sceneBorder) {
         if(sceneBorder.equals(SceneBorder.BOTTOM)) {
+            removed = true;
             remove();
+            System.out.println("Platform verwijderd");
         }
     }
 }

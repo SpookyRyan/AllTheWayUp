@@ -21,6 +21,7 @@ BrokenPlatform extends Platform implements Collided, Collider {
         for(Collider collider : list){
             if (collider instanceof Uppie){
                 remove();
+                setRemoved();
             }
         }
     }
