@@ -22,7 +22,7 @@ public class Uppie extends DynamicSpriteEntity implements Collided, Collider, Ke
     private final AllTheWayUp game;;
     long prevMillis;
     private double currentGravity = 0;
-    private boolean isInJump = false;
+    private static boolean isInJump = false;
     private boolean isCollided = false;
     private final double jumpStartGravity = -2.7;
     private final double maxGravity = 2;
@@ -137,5 +137,9 @@ public class Uppie extends DynamicSpriteEntity implements Collided, Collider, Ke
             }
         }
         vorigeY = uppieY;
+    }
+
+    public static boolean getIsInJump(){
+        return isInJump;
     }
 }
