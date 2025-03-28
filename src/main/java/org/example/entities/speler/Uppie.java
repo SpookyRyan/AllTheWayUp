@@ -10,6 +10,7 @@ import com.github.hanyaeger.api.userinput.KeyListener;
 import javafx.scene.input.KeyCode;
 import org.example.AllTheWayUp;
 import org.example.entities.platformen.Platform;
+import org.example.entities.text.ScoreText;
 
 import java.util.List;
 import java.util.Set;
@@ -23,6 +24,9 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
     private double gravityStep = 0.1;
     private List<Collider> platforms;
     private double vorigeY;
+    private int score = 0;
+    private ScoreText scoreText;
+
 
     public Uppie(Coordinate2D initialLocation, AllTheWayUp game) {
         super(initialLocation);
@@ -31,6 +35,7 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
         setGravityConstant(1);
         setFrictionConstant(0.3);
     }
+
 
     @Override
     protected void setupEntities() {
@@ -108,6 +113,7 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
 
     public void checkOfUppieBovenLimitIs(List<Collider> list){
         if (list == null) return;
+        scoreText.setScoreText(score);
 
         double uppieY = getY();
         double limit = 300;
@@ -115,16 +121,23 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
         if (uppieY < limit && uppieY < vorigeY) {
             double verschil = vorigeY - uppieY;
             gravityStep = 0.15;
+            score += verschil;
 
             for (Collider collider : list) {
                 if (collider instanceof Platform) {
                     ((Platform) collider).moveDown(verschil);
                 }
             }
+
         } else {
             gravityStep = 0.1;
         }
         vorigeY = uppieY;
     }
+
+    public void setScoreText(ScoreText scoreText) {
+        this.scoreText = scoreText;
+    }
+
 
 }
