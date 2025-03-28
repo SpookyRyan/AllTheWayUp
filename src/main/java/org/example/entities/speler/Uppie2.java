@@ -9,9 +9,9 @@ import com.github.hanyaeger.api.scenes.SceneBorder;
 import com.github.hanyaeger.api.userinput.KeyListener;
 import javafx.scene.input.KeyCode;
 import org.example.AllTheWayUp;
+import org.example.entities.objects.Upcoin;
 import org.example.entities.platformen.Platform;
 
-import java.lang.annotation.Target;
 import java.util.List;
 import java.util.Set;
 
@@ -120,6 +120,8 @@ public class Uppie2 extends DynamicCompositeEntity implements SceneBorderCrossin
             for (Collider collider : list) {
                 if (collider instanceof Platform) {
                     ((Platform) collider).moveDown(verschil);
+                } else if (collider instanceof Upcoin) {
+                    ((Upcoin) collider).moveDown(verschil);
                 }
             }
         } else {
