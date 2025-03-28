@@ -12,7 +12,7 @@ import java.util.List;
 
 public class BrokenPlatform extends Platform implements Collided, Collider {
 
-    public BrokenPlatform(Coordinate2D initialLocation, Size size, int platformsPlaced) {
+    public BrokenPlatform(Coordinate2D initialLocation, Size size) {
         super("images/BrokenPlatform.png", initialLocation, size);
     }
 

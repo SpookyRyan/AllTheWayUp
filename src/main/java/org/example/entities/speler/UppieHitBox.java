@@ -5,6 +5,7 @@ import com.github.hanyaeger.api.entities.Collided;
 import com.github.hanyaeger.api.entities.Collider;
 import com.github.hanyaeger.api.entities.impl.RectangleEntity;
 import javafx.scene.paint.Color;
+import org.example.entities.boosters.BoosterEntity;
 
 import java.util.List;
 
@@ -20,6 +21,14 @@ public class UppieHitBox extends RectangleEntity implements Collided, Collider {
 
     @Override
     public void onCollision(List<Collider> list) {
+        for (Collider collider : list) {
+            if (collider instanceof BoosterEntity booster) {
+                booster.boostUpwards();
+                booster.remove();
+            }
+        }
+
+
         if (!Uppie.getIsInJump()) {
             isCollided = true;
         }

@@ -9,9 +9,11 @@ import com.github.hanyaeger.api.scenes.SceneBorder;
 import com.github.hanyaeger.api.userinput.KeyListener;
 import javafx.scene.input.KeyCode;
 import org.example.AllTheWayUp;
+import org.example.entities.boosters.BoosterEntity;
 import org.example.entities.platformen.Platform;
 import org.example.entities.text.ScoreText;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -23,6 +25,7 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
     private final double maxGravity = 2;
     private double gravityStep = 0.1;
     private List<Collider> platforms;
+    private List<Collider> boosterLijst;
     private double vorigeY;
     private int score = 0;
     private ScoreText scoreText;
@@ -107,6 +110,10 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
         this.platforms = platforms;
     }
 
+    public void setBoosters(List<Collider> boosters) {
+        this.boosterLijst = boosters;
+    }
+
     public int getY(){
         return (int) getAnchorLocation().getY();
     }
@@ -123,9 +130,15 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
             gravityStep = 0.15;
             score += verschil/3;
 
-            for (Collider collider : list) {
+            for (Collider collider : platforms) {
                 if (collider instanceof Platform) {
                     ((Platform) collider).moveDown(verschil);
+                }
+            }
+
+            for (Collider collider : boosterLijst) {
+                if (collider instanceof BoosterEntity) {
+                    ((BoosterEntity) collider).moveDown(verschil);
                 }
             }
 
@@ -139,5 +152,14 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
         this.scoreText = scoreText;
     }
 
+
+    public void setCurrentGravity(double gravity) {
+        this.currentGravity = gravity;
+        setGravityConstant(gravity);
+    }
+
+    public void setIsInJump(boolean isJumping) {
+        isInJump = isJumping;
+    }
 
 }

@@ -74,7 +74,7 @@ public class PlatformSpawner extends EntitySpawner {
                     spawn(hitbox);
 
                 } else {
-                    BrokenPlatform platform = new BrokenPlatform(nieuweLocatie, new Size(60, 40), platformGeplaatst);
+                    BrokenPlatform platform = new BrokenPlatform(nieuweLocatie, new Size(60, 40));
                     spawn(platform);
                     platformenLijst.add(platform);
                 }
@@ -92,7 +92,4 @@ public class PlatformSpawner extends EntitySpawner {
         }
         return false;
     }
-
-
-
 }
