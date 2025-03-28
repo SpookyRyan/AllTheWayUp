@@ -59,9 +59,9 @@ public class Uppie2 extends DynamicCompositeEntity implements SceneBorderCrossin
 
     @Override
     public void onPressedKeysChange(Set<KeyCode> pressedKeys){
-        if(pressedKeys.contains(KeyCode.LEFT)){
+        if(pressedKeys.contains(KeyCode.LEFT) || pressedKeys.contains(KeyCode.A)){
             addToMotion(0.7,270d);
-        } else if(pressedKeys.contains(KeyCode.RIGHT)) {
+        } else if(pressedKeys.contains(KeyCode.RIGHT) || pressedKeys.contains(KeyCode.D)){
             addToMotion(0.7, 90d);
         }
     }
