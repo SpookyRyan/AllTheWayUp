@@ -31,13 +31,13 @@ public class PlatformSpawner extends EntitySpawner {
     @Override
     protected void spawnEntities() {
 
-        platformenLijst.removeIf(p -> {
-            if (p instanceof Platform && ((Platform) p).isRemoved()) {
-                platformLocaties.remove(((Platform) p).getLocatie());
-                return true;
-            }
-            return false;
-        });
+//        platformenLijst.removeIf(p -> {
+//            if (p instanceof Platform && ((Platform) p).isRemoved()) {
+//                platformLocaties.remove(((Platform) p).getLocatie());
+//                return true;
+//            }
+//            return false;
+//        });
 
         if (startOfGame) {
             for (int x = 0; x <= sceneWidth; x += 60) {
@@ -56,7 +56,7 @@ public class PlatformSpawner extends EntitySpawner {
             startOfGame = false;
         }
 
-        while (platformenLijst.size() < amountOfPlatforms) {
+        while (platformGeplaatst < amountOfPlatforms) {
             double x = random.nextDouble() * (sceneWidth - 60 * 2) + 60;
             double y = random.nextDouble() * sceneHeight + 80;
 

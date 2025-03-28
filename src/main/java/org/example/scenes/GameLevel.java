@@ -34,6 +34,7 @@ public class GameLevel extends DynamicScene implements EntitySpawnerContainer {
 //        addEntity(uppie);
 
         Uppie2 uppie2 = new Uppie2(new Coordinate2D(250, 700), game);
+        uppie2.setViewOrder(1);
         uppie2.setPlatforms(platformenLijst);
         addEntity(uppie2);
 

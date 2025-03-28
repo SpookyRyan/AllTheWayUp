@@ -21,7 +21,7 @@ public class Uppie2 extends DynamicCompositeEntity implements SceneBorderCrossin
     private double currentGravity = 0;
     private final double jumpStartGravity = -2.7;
     private final double maxGravity = 2;
-    private final double gravityStep = 0.1;
+    private double gravityStep = 0.1;
     private List<Collider> platforms;
     private double vorigeY;
 
@@ -71,6 +71,7 @@ public class Uppie2 extends DynamicCompositeEntity implements SceneBorderCrossin
         addTimer(new Timer(10) {
             @Override
             public void onAnimationUpdate(long timestamp) {
+
                 jumpAutomatically();
             }
         });
@@ -114,12 +115,15 @@ public class Uppie2 extends DynamicCompositeEntity implements SceneBorderCrossin
 
         if (uppieY < limit && uppieY < vorigeY) {
             double verschil = vorigeY - uppieY;
+            gravityStep = 0.15;
 
             for (Collider collider : list) {
                 if (collider instanceof Platform) {
                     ((Platform) collider).moveDown(verschil);
                 }
             }
+        } else {
+            gravityStep = 0.1;
         }
         vorigeY = uppieY;
     }
