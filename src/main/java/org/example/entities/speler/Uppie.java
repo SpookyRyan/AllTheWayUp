@@ -121,7 +121,7 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
         if (uppieY < limit && uppieY < vorigeY) {
             double verschil = vorigeY - uppieY;
             gravityStep = 0.15;
-            score += verschil/10;
+            score += verschil/3;
 
             for (Collider collider : list) {
                 if (collider instanceof Platform) {
