@@ -10,13 +10,15 @@ import com.github.hanyaeger.api.userinput.KeyListener;
 import javafx.scene.input.KeyCode;
 import org.example.AllTheWayUp;
 import org.example.entities.boosters.BoosterEntity;
+import org.example.entities.objects.Upcoin;
 import org.example.entities.platformen.Platform;
 import org.example.entities.text.ScoreText;
+import org.example.entities.text.UpcoinScoreText;
 
 import java.util.List;
 import java.util.Set;
 
-public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossingWatcher, KeyListener, TimerContainer, Newtonian {
+public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossingWatcher, KeyListener, TimerContainer, Newtonian, Collided {
     private final AllTheWayUp game;
     private static boolean isInJump = false;
     private double currentGravity = 0;
@@ -28,6 +30,7 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
     private double vorigeY;
     private int score = 0;
     private ScoreText scoreText;
+    private UpcoinScoreText upcoinScoreText;
 
 
     public Uppie(Coordinate2D initialLocation, AllTheWayUp game) {
@@ -124,7 +127,6 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
     public void checkOfUppieBovenLimitIs(List<Collider> list){
         if (list == null) return;
         scoreText.setScoreText(score);
-
         double uppieY = getY();
         double limit = 230;
 
@@ -156,6 +158,8 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
         this.scoreText = scoreText;
     }
 
+    public void setUpcoinScoreText(UpcoinScoreText upcoinScoreText) { this.upcoinScoreText = upcoinScoreText; }
+
 
     public void setCurrentGravity(double gravity) {
         this.currentGravity = gravity;
@@ -166,4 +170,14 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
         isInJump = isJumping;
     }
 
+    @Override
+    public void onCollision(List<Collider> list) {
+        for (Collider collider : list) {
+            if(collider instanceof Upcoin){
+                score++;
+                upcoinScoreText.setUpcoinScoreText(score);
+
+            }
+        }
+    }
 }

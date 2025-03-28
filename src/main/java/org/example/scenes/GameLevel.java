@@ -9,6 +9,7 @@ import org.example.entities.boosters.BoosterSpawner;
 import org.example.entities.platformen.PlatformSpawner;
 import org.example.entities.speler.Uppie;
 import org.example.entities.text.ScoreText;
+import org.example.entities.text.UpcoinScoreText;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,12 +36,16 @@ public class GameLevel extends DynamicScene implements EntitySpawnerContainer {
         var scoreText = new ScoreText(new Coordinate2D(30, 20));
         addEntity(scoreText);
 
+        var upcoinScoreText = new UpcoinScoreText(new Coordinate2D(30, 50));
+        addEntity(upcoinScoreText);
+
         uppie = new Uppie(new Coordinate2D(250, 700), game);
         uppie.setViewOrder(1);
         uppie.setPlatforms(platformenLijst);
         uppie.setBoosters(boosterLijst);
 
         uppie.setScoreText(scoreText);
+        uppie.setUpcoinScoreText(upcoinScoreText);
         addEntity(uppie);
 
     }
