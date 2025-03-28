@@ -20,7 +20,7 @@ public class UppieHitBox extends RectangleEntity implements Collided, Collider {
 
     @Override
     public void onCollision(List<Collider> list) {
-        if (!Uppie2.getIsInJump()) {
+        if (!Uppie.getIsInJump()) {
             isCollided = true;
         }
 

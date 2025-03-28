@@ -4,8 +4,8 @@ import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.entities.Collided;
 import com.github.hanyaeger.api.entities.Collider;
+//import org.example.entities.speler.Uppie;
 import org.example.entities.speler.Uppie;
-import org.example.entities.speler.Uppie2;
 import org.example.entities.speler.UppieHitBox;
 
 import java.util.List;
@@ -20,7 +20,7 @@ public class BrokenPlatform extends Platform implements Collided, Collider {
     @Override
     public void onCollision(List<Collider> list) {
         for(Collider collider : list){
-            if (collider instanceof UppieHitBox && !Uppie2.getIsInJump()){
+            if (collider instanceof UppieHitBox && !Uppie.getIsInJump()){
                 remove();
                 setRemoved();
             }
