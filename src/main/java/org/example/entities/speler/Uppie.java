@@ -36,6 +36,9 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
 
         setGravityConstant(1);
         setFrictionConstant(0.3);
+
+        this.vorigeY = getAnchorLocation().getY();
+
     }
 
 
@@ -92,6 +95,7 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
         }
         if (currentGravity < maxGravity) {
             currentGravity += gravityStep;
+
             setGravityConstant(currentGravity);
 
             if (currentGravity > 0) {
@@ -122,12 +126,13 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
         scoreText.setScoreText(score);
 
         double uppieY = getY();
-        double limit = 300;
+        double limit = 230;
 
         if (uppieY < limit && uppieY < vorigeY) {
             double verschil = vorigeY - uppieY;
             gravityStep = 0.15;
             score += verschil/3;
+            setAnchorLocationY(limit);
 
             for (Collider collider : platforms) {
                 if (collider instanceof Platform) {
@@ -144,7 +149,7 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
         } else {
             gravityStep = 0.1;
         }
-        vorigeY = uppieY;
+        vorigeY = getY();
     }
 
     public void setScoreText(ScoreText scoreText) {
