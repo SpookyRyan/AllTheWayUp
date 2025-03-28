@@ -2,13 +2,13 @@ package org.example.scenes;
 
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.EntitySpawnerContainer;
-import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.entities.Collider;
 import com.github.hanyaeger.api.scenes.DynamicScene;
 import org.example.AllTheWayUp;
 import org.example.entities.platformen.PlatformSpawner;
 //import org.example.entities.speler.Uppie;
-import org.example.entities.speler.Uppie2;
+import org.example.entities.speler.Uppie;
+import org.example.entities.text.ScoreText;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,17 +25,18 @@ public class GameLevel extends DynamicScene implements EntitySpawnerContainer {
     public void setupScene() {
     setBackgroundAudio("audio/GameLevelTheme.mp3");
     setBackgroundAudioVolume(0.3);
+    setBackgroundImage("images/GameBackground.png");
     }
 
     @Override
     public void setupEntities() {
-//        Uppie uppie = new Uppie(new Coordinate2D(250, 700), new Size(50, 50), game);
-//        uppie.setPlatforms(platformenLijst);
-//        addEntity(uppie);
+        var scoreText = new ScoreText(new Coordinate2D(30, 20));
+        addEntity(scoreText);
 
-        Uppie2 uppie2 = new Uppie2(new Coordinate2D(250, 700), game);
+        Uppie uppie2 = new Uppie(new Coordinate2D(250, 700), game);
         uppie2.setViewOrder(1);
         uppie2.setPlatforms(platformenLijst);
+        uppie2.setScoreText(scoreText);
         addEntity(uppie2);
 
     }

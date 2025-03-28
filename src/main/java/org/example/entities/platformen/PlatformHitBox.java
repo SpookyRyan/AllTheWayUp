@@ -8,7 +8,8 @@ import com.github.hanyaeger.api.entities.impl.RectangleEntity;
 import com.github.hanyaeger.api.scenes.SceneBorder;
 //import com.github.hanyaeger.core.entities.motion.MotionApplier;
 import javafx.scene.paint.Color;
-import org.example.entities.speler.Uppie;
+import org.example.entities.speler.UppieHitBox;
+//import org.example.entities.speler.Uppie;
 
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class PlatformHitBox extends RectangleEntity implements Collider, Collide
     @Override
     public void onCollision(List<Collider> list) {
         for(Collider collider : list){
-            if (collider instanceof Uppie && platformType.equals("broken")){
+            if (collider instanceof UppieHitBox && platformType.equals("broken")){
                 remove();
             }
         }

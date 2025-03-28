@@ -2,44 +2,47 @@ package org.example.entities.speler;
 
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.Size;
-import com.github.hanyaeger.api.entities.Collided;
-import com.github.hanyaeger.api.entities.Collider;
-import com.github.hanyaeger.api.entities.Newtonian;
-import com.github.hanyaeger.api.entities.SceneBorderCrossingWatcher;
-import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
+import com.github.hanyaeger.api.Timer;
+import com.github.hanyaeger.api.TimerContainer;
+import com.github.hanyaeger.api.entities.*;
 import com.github.hanyaeger.api.scenes.SceneBorder;
 import com.github.hanyaeger.api.userinput.KeyListener;
 import javafx.scene.input.KeyCode;
 import org.example.AllTheWayUp;
 import org.example.entities.platformen.Platform;
-import com.github.hanyaeger.api.TimerContainer;
-import com.github.hanyaeger.api.Timer;
+import org.example.entities.text.ScoreText;
 
 import java.util.List;
 import java.util.Set;
 
-public class Uppie extends DynamicSpriteEntity implements Collided, Collider, KeyListener, SceneBorderCrossingWatcher, Newtonian, TimerContainer{
-    private final AllTheWayUp game;;
-    long prevMillis;
-    private double currentGravity = 0;
+public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossingWatcher, KeyListener, TimerContainer, Newtonian {
+    private final AllTheWayUp game;
     private static boolean isInJump = false;
-    private boolean isCollided = false;
+    private double currentGravity = 0;
     private final double jumpStartGravity = -2.7;
     private final double maxGravity = 2;
-    private final double gravityStep = 0.1;
+    private double gravityStep = 0.1;
     private List<Collider> platforms;
     private double vorigeY;
+    private int score = 0;
+    private ScoreText scoreText;
 
 
-
-    public Uppie(Coordinate2D positie, Size grootte, AllTheWayUp game) {
-        super("Sprites/Uppie.png", positie, grootte);
+    public Uppie(Coordinate2D initialLocation, AllTheWayUp game) {
+        super(initialLocation);
         this.game = game;
-        this.vorigeY = positie.getY();
 
         setGravityConstant(1);
         setFrictionConstant(0.3);
     }
+
+
+    @Override
+    protected void setupEntities() {
+        addEntity(new UppieSprite(new Coordinate2D(0, 0), new Size(50, 50)));
+        addEntity(new UppieHitBox(new Coordinate2D(0, 45)));
+    }
+
 
     @Override
     public void notifyBoundaryCrossing(SceneBorder sceneBorder) {
@@ -58,8 +61,6 @@ public class Uppie extends DynamicSpriteEntity implements Collided, Collider, Ke
         }
     }
 
-
-
     @Override
     public void onPressedKeysChange(Set<KeyCode> pressedKeys){
         if(pressedKeys.contains(KeyCode.LEFT)){
@@ -74,44 +75,33 @@ public class Uppie extends DynamicSpriteEntity implements Collided, Collider, Ke
         addTimer(new Timer(10) {
             @Override
             public void onAnimationUpdate(long timestamp) {
+
                 jumpAutomatically();
             }
         });
     }
 
-    @Override
-    public void onCollision(List<Collider> list) {
-        if (!isInJump) {
-            isCollided = true;
-        }
-//        System.out.println("joepie");
-
-    }
-
-
     public void jumpAutomatically() {
-        long millis = System.currentTimeMillis();
-
-        if (isCollided && !isInJump) {
+        if (UppieHitBox.getIsCollided() && !isInJump) {
             currentGravity = jumpStartGravity;
             setGravityConstant(currentGravity);
-            prevMillis = millis;
             isInJump = true;
-            isCollided = false;
+            UppieHitBox.setIsCollided(false);
         }
         if (currentGravity < maxGravity) {
             currentGravity += gravityStep;
             setGravityConstant(currentGravity);
 
             if (currentGravity > 0) {
-//                System.out.println("joepie");
                 isInJump = false;
             }
         }
-
         checkOfUppieBovenLimitIs(platforms);
     }
 
+    public static boolean getIsInJump(){
+        return isInJump;
+    }
 
     public void setPlatforms(List<Collider> platforms) {
         this.platforms = platforms;
@@ -123,23 +113,31 @@ public class Uppie extends DynamicSpriteEntity implements Collided, Collider, Ke
 
     public void checkOfUppieBovenLimitIs(List<Collider> list){
         if (list == null) return;
+        scoreText.setScoreText(score);
 
         double uppieY = getY();
         double limit = 300;
 
         if (uppieY < limit && uppieY < vorigeY) {
             double verschil = vorigeY - uppieY;
+            gravityStep = 0.15;
+            score += verschil;
 
             for (Collider collider : list) {
                 if (collider instanceof Platform) {
                     ((Platform) collider).moveDown(verschil);
                 }
             }
+
+        } else {
+            gravityStep = 0.1;
         }
         vorigeY = uppieY;
     }
 
-    public static boolean getIsInJump(){
-        return isInJump;
+    public void setScoreText(ScoreText scoreText) {
+        this.scoreText = scoreText;
     }
+
+
 }
