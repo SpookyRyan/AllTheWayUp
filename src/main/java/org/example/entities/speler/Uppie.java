@@ -138,4 +138,9 @@ public class Uppie extends DynamicSpriteEntity implements Collided, Collider, Ke
         }
         vorigeY = uppieY;
     }
+
+
+
+
+
 }
