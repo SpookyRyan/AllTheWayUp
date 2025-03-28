@@ -13,7 +13,6 @@ import org.example.entities.boosters.BoosterEntity;
 import org.example.entities.platformen.Platform;
 import org.example.entities.text.ScoreText;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
