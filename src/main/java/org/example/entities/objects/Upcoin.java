@@ -1,42 +1,44 @@
 package org.example.entities.objects;
 
 import com.github.hanyaeger.api.Coordinate2D;
+import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.entities.Collided;
 import com.github.hanyaeger.api.entities.Collider;
-import com.github.hanyaeger.api.entities.impl.DynamicCircleEntity;
+import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
 import com.github.hanyaeger.api.media.SoundClip;
 import org.example.entities.speler.Uppie;
+import org.example.entities.speler.UppieHitBox;
 
 import java.util.List;
 
-public class Upcoin extends DynamicCircleEntity implements Collider, Collided {
+public class Upcoin extends DynamicSpriteEntity implements Collider, Collided {
+    private boolean collected = false;
 
     protected Upcoin(Coordinate2D initialLocation) {
-        super(initialLocation);
-        setOpacity(0.5);
-        setStrokeWidth(0.2);
+        super("images/bitcoin.png", initialLocation, new Size(40, 40));
     }
 
     @Override
     public void onCollision(List<Collider> list) {
-        var shouldRemove = false;
+        if (collected) return;
         for (Collider collider : list) {
-            if (collider instanceof Uppie) {
-                shouldRemove = true;
+            if (collider instanceof UppieHitBox) {
+                collected = true;
+                var coinSound = new SoundClip("audio/coin.mp3");
+                coinSound.play();
+                remove();
                 break;
             }
         }
-        if (shouldRemove) {
-            var coinSound = new SoundClip("audio/coin.mp3");
-            coinSound.play();
-
-            remove();
-        }
     }
 
-    public void moveDown(double hoeveelheid) {
-        setAnchorLocationY(getAnchorLocation().getY() + hoeveelheid);
+    public void moveDown(double amount) {
+        setAnchorLocationY(getAnchorLocation().getY() + amount);
     }
+
+
+
+
 
 
 }

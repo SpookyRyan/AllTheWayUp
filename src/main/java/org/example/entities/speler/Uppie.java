@@ -27,8 +27,10 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
     private double gravityStep = 0.1;
     private List<Collider> platforms;
     private List<Collider> boosterLijst;
+    private List<Upcoin> upcoinLijst;
     private double vorigeY;
     private int score = 0;
+    private int upcoinScore = 0;
     private ScoreText scoreText;
     private UpcoinScoreText upcoinScoreText;
 
@@ -120,6 +122,10 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
         this.boosterLijst = boosters;
     }
 
+    public void setUpcoins(List<Upcoin> upcoins) {
+        this.upcoinLijst = upcoins;
+    }
+
     public int getY(){
         return (int) getAnchorLocation().getY();
     }
@@ -145,6 +151,12 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
             for (Collider collider : boosterLijst) {
                 if (collider instanceof BoosterEntity) {
                     ((BoosterEntity) collider).moveDown(verschil);
+                }
+            }
+
+            for (Collider collider : upcoinLijst) {
+                if (collider instanceof Upcoin) {
+                    ((Upcoin) collider).moveDown(verschil);
                 }
             }
 
@@ -174,9 +186,8 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
     public void onCollision(List<Collider> list) {
         for (Collider collider : list) {
             if(collider instanceof Upcoin){
-                score++;
-                upcoinScoreText.setUpcoinScoreText(score);
-
+                upcoinScore++;
+                upcoinScoreText.setUpcoinScoreText(upcoinScore);
             }
         }
     }

@@ -6,6 +6,8 @@ import com.github.hanyaeger.api.entities.Collider;
 import com.github.hanyaeger.api.scenes.DynamicScene;
 import org.example.AllTheWayUp;
 import org.example.entities.boosters.BoosterSpawner;
+import org.example.entities.objects.Upcoin;
+import org.example.entities.objects.UpcoinSpawner;
 import org.example.entities.platformen.PlatformSpawner;
 import org.example.entities.speler.Uppie;
 import org.example.entities.text.ScoreText;
@@ -18,6 +20,7 @@ public class GameLevel extends DynamicScene implements EntitySpawnerContainer {
     private AllTheWayUp game;
     private List<Collider> platformenLijst = new ArrayList<>();
     private List<Collider> boosterLijst = new ArrayList<>();
+    private List<Upcoin> upcoinLijst = new ArrayList<>();
     private Uppie uppie;
 
     public GameLevel(AllTheWayUp game) {
@@ -43,6 +46,7 @@ public class GameLevel extends DynamicScene implements EntitySpawnerContainer {
         uppie.setViewOrder(1);
         uppie.setPlatforms(platformenLijst);
         uppie.setBoosters(boosterLijst);
+        uppie.setUpcoins(upcoinLijst);
 
         uppie.setScoreText(scoreText);
         uppie.setUpcoinScoreText(upcoinScoreText);
@@ -58,5 +62,8 @@ public class GameLevel extends DynamicScene implements EntitySpawnerContainer {
 
         BoosterSpawner boosterSpawner = new BoosterSpawner(500, getWidth(), uppie, boosterLijst);
         addEntitySpawner(boosterSpawner);
+
+        UpcoinSpawner upcoinSpawner = new UpcoinSpawner(1000, getWidth(), upcoinLijst);
+        addEntitySpawner(upcoinSpawner);
     }
 }
