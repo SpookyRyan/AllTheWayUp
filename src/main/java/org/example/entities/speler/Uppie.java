@@ -10,6 +10,7 @@ import com.github.hanyaeger.api.userinput.KeyListener;
 import javafx.scene.input.KeyCode;
 import org.example.AllTheWayUp;
 import org.example.entities.boosters.BoosterEntity;
+import org.example.entities.enemy.Monster;
 import org.example.entities.objects.Upcoin;
 import org.example.entities.platformen.Platform;
 import org.example.entities.text.ScoreText;
@@ -27,6 +28,7 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
     private double gravityStep = 0.1;
     private List<Collider> platforms;
     private List<Collider> boosterLijst;
+    private List<Collider> monsterLijst;
     private double vorigeY;
     private int score = 0;
     private ScoreText scoreText;
@@ -120,6 +122,11 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
         this.boosterLijst = boosters;
     }
 
+    public void setMonsters(List<Collider> monsters) {
+        this.monsterLijst = monsters;
+    }
+
+
     public int getY(){
         return (int) getAnchorLocation().getY();
     }
@@ -145,6 +152,12 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
             for (Collider collider : boosterLijst) {
                 if (collider instanceof BoosterEntity) {
                     ((BoosterEntity) collider).moveDown(verschil);
+                }
+            }
+
+            for (Collider collider : monsterLijst) {
+                if (collider instanceof Monster) {
+                    ((Monster) collider).moveDown(verschil);
                 }
             }
 

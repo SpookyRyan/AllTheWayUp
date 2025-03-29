@@ -14,7 +14,7 @@ public class PlatformSpawner extends EntitySpawner {
     private final double sceneWidth;
     private final double sceneHeight;
     private final Random random;
-    private int platformGeplaatst = 0;
+    private int platformsPlaced = 0;
     private final List<Coordinate2D> platformLocaties = new ArrayList<>();
     private int amountOfPlatforms = 110;
     private boolean startOfGame = true;
@@ -56,7 +56,7 @@ public class PlatformSpawner extends EntitySpawner {
             startOfGame = false;
         }
 
-        while (platformGeplaatst < amountOfPlatforms) {
+        while (platformsPlaced < amountOfPlatforms) {
             double x = random.nextDouble() * (sceneWidth - 60 * 2) + 60;
             double y = -5000 + random.nextDouble() * (sceneHeight + 5000 - 80);
 
@@ -77,7 +77,7 @@ public class PlatformSpawner extends EntitySpawner {
                     platformenLijst.add(platform);
                 }
                 platformLocaties.add(nieuweLocatie);
-                platformGeplaatst++;
+                platformsPlaced++;
             }
         }
 
