@@ -20,12 +20,16 @@ public class Upcoin extends DynamicSpriteEntity implements Collider, Collided {
 
     @Override
     public void onCollision(List<Collider> list) {
-        if (collected) return;
+        if (collected){
+            return;
+        }
         for (Collider collider : list) {
             if (collider instanceof UppieHitBox) {
                 collected = true;
+
                 var coinSound = new SoundClip("audio/coin.mp3");
                 coinSound.play();
+                Uppie.increaseUpcoinScore();
                 remove();
                 break;
             }

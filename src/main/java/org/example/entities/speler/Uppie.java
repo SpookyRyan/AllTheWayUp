@@ -30,9 +30,9 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
     private List<Upcoin> upcoinLijst;
     private double vorigeY;
     private int score = 0;
-    private int upcoinScore = 0;
+    private static int upcoinScore = 0;
     private ScoreText scoreText;
-    private UpcoinScoreText upcoinScoreText;
+    private static UpcoinScoreText upcoinScoreText;
 
 
     public Uppie(Coordinate2D initialLocation, AllTheWayUp game) {
@@ -184,11 +184,18 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
 
     @Override
     public void onCollision(List<Collider> list) {
+        /*
         for (Collider collider : list) {
             if(collider instanceof Upcoin){
                 upcoinScore++;
                 upcoinScoreText.setUpcoinScoreText(upcoinScore);
             }
         }
+        */
+    }
+
+    public static void increaseUpcoinScore() {
+        upcoinScore++;
+        upcoinScoreText.setUpcoinScoreText(upcoinScore);
     }
 }
