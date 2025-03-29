@@ -11,10 +11,11 @@ public class UpcoinScoreText extends TextEntity {
     public UpcoinScoreText(Coordinate2D initialLocation) {
         super(initialLocation);
         setFont(Font.font("Roboto", FontWeight.NORMAL, 30));
-        setFill(Color.DARKCYAN);
+        setFill(Color.BLUE);
     }
 
     public void setUpcoinScoreText(int Score) {
+
         setText("Up-coins: " + Score);
     }
 }

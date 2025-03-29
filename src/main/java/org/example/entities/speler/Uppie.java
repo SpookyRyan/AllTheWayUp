@@ -33,7 +33,7 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
     private double vorigeY;
     private int score = 0;
     private ScoreText scoreText;
-    private UpcoinScoreText upcoinScoreText;
+    private static UpcoinScoreText upcoinScoreText;
     private static int upcoinScore = 0;
 
     public Uppie(Coordinate2D initialLocation, AllTheWayUp game) {

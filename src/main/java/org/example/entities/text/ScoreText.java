@@ -11,10 +11,11 @@ public class ScoreText extends TextEntity {
     public ScoreText(Coordinate2D initialLocation) {
         super(initialLocation);
         setFont(Font.font("Roboto", FontWeight.NORMAL, 30));
-        setFill(Color.DARKCYAN);
+        setFill(Color.BLUE);
     }
 
     public void setScoreText(int Score) {
+
         setText("Score: " + Score);
     }
 }

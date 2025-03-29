@@ -9,7 +9,6 @@ import org.example.entities.boosters.BoosterSpawner;
 import org.example.entities.enemy.EnemySpawner;
 import org.example.entities.objects.Upcoin;
 import org.example.entities.objects.UpcoinSpawner;
-import org.example.entities.objects.Upcoin;
 import org.example.entities.platformen.PlatformSpawner;
 import org.example.entities.speler.Uppie;
 import org.example.entities.text.ScoreText;
@@ -41,9 +40,11 @@ public class GameLevel extends DynamicScene implements EntitySpawnerContainer {
     public void setupEntities() {
         var scoreText = new ScoreText(new Coordinate2D(30, 20));
         addEntity(scoreText);
+        scoreText.setViewOrder(2);
 
         var upcoinScoreText = new UpcoinScoreText(new Coordinate2D(30, 50));
         addEntity(upcoinScoreText);
+        upcoinScoreText.setViewOrder(2);
 
         uppie = new Uppie(new Coordinate2D(250, 700), game);
         uppie.setViewOrder(1);
