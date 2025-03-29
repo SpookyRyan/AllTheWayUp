@@ -6,6 +6,7 @@ import com.github.hanyaeger.api.entities.Collider;
 import com.github.hanyaeger.api.entities.impl.RectangleEntity;
 import javafx.scene.paint.Color;
 import org.example.entities.boosters.BoosterEntity;
+import org.example.entities.platformen.Platform;
 
 import java.util.List;
 
@@ -28,9 +29,12 @@ public class UppieHitBox extends RectangleEntity implements Collided, Collider {
             }
         }
 
-
-        if (!Uppie.getIsInJump()) {
-            isCollided = true;
+        for (Collider collider : list) {
+            if (collider instanceof Platform) {
+                if (!Uppie.getIsInJump()) {
+                    isCollided = true;
+                }
+            }
         }
 
     }

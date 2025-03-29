@@ -6,16 +6,16 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-public class ScoreText extends TextEntity {
+public class UpcoinScoreText extends TextEntity {
 
-    public ScoreText(Coordinate2D initialLocation) {
+    public UpcoinScoreText(Coordinate2D initialLocation) {
         super(initialLocation);
         setFont(Font.font("Roboto", FontWeight.NORMAL, 30));
         setFill(Color.BLUE);
     }
 
-    public void setScoreText(int Score) {
+    public void setUpcoinScoreText(int Score) {
 
-        setText("Score: " + Score);
+        setText("Up-coins: " + Score);
     }
 }

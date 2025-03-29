@@ -46,7 +46,6 @@ public class Platform extends DynamicSpriteEntity implements Collider, SceneBord
         if(sceneBorder.equals(SceneBorder.BOTTOM)) {
             removed = true;
             remove();
-            System.out.println("Platform verwijderd");
         }
     }
 }
