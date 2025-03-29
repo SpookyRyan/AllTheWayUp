@@ -29,11 +29,12 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
     private List<Collider> platforms;
     private List<Collider> boosterLijst;
     private List<Collider> monsterLijst;
+    private List<Upcoin> upcoinLijst;
     private double vorigeY;
     private int score = 0;
     private ScoreText scoreText;
     private UpcoinScoreText upcoinScoreText;
-
+    private static int upcoinScore = 0;
 
     public Uppie(Coordinate2D initialLocation, AllTheWayUp game) {
         super(initialLocation);
@@ -126,6 +127,9 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
         this.monsterLijst = monsters;
     }
 
+    public void setUpcoins(List<Upcoin> upcoins) {
+        this.upcoinLijst = upcoins;
+    }
 
     public int getY(){
         return (int) getAnchorLocation().getY();
@@ -161,6 +165,12 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
                 }
             }
 
+            for (Collider collider : upcoinLijst) {
+                if (collider instanceof Upcoin) {
+                    ((Upcoin) collider).moveDown(verschil);
+                }
+            }
+
         } else {
             gravityStep = 0.1;
         }
@@ -185,12 +195,18 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
 
     @Override
     public void onCollision(List<Collider> list) {
+        /*
         for (Collider collider : list) {
             if(collider instanceof Upcoin){
-                score++;
-                upcoinScoreText.setUpcoinScoreText(score);
-
+                upcoinScore++;
+                upcoinScoreText.setUpcoinScoreText(upcoinScore);
             }
         }
+        */
+    }
+
+    public static void increaseUpcoinScore() {
+        upcoinScore++;
+        upcoinScoreText.setUpcoinScoreText(upcoinScore);
     }
 }
