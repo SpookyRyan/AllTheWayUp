@@ -16,6 +16,7 @@ public class UpcoinSpawner extends EntitySpawner {
     private final double sceneWidth;
     private final Random random;
     private final List<Upcoin> upcoinLijst;
+    private double previousY;
 
     public UpcoinSpawner(long intervalInMs, double sceneWidth, List<Upcoin> upcoinLijst) {
         super(intervalInMs);
@@ -30,13 +31,16 @@ public class UpcoinSpawner extends EntitySpawner {
             double x = random.nextDouble() * (sceneWidth - 60);
             double y = -50;
 
-            Coordinate2D locatie = new Coordinate2D(x, y);
-            Upcoin upcoin;
+            if (y != previousY) {
+                Coordinate2D locatie = new Coordinate2D(x, y);
+                Upcoin upcoin;
 
-            upcoin = new Upcoin(locatie);
+                upcoin = new Upcoin(locatie);
 
-            upcoinLijst.add(upcoin);
-            spawn(upcoin);
+                upcoinLijst.add(upcoin);
+                spawn(upcoin);
+                previousY = y;
+            }
         }
     }
 }

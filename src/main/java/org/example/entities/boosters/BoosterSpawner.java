@@ -13,6 +13,7 @@ public class BoosterSpawner extends EntitySpawner {
     private final Random random;
     private final Uppie uppie;
     private final List<Collider> boosterLijst;
+    private double previousY;
 
     public BoosterSpawner(long intervalInMs, double sceneWidth, Uppie uppie, List<Collider> boosterLijst) {
         super(intervalInMs);
@@ -31,14 +32,17 @@ public class BoosterSpawner extends EntitySpawner {
             Coordinate2D locatie = new Coordinate2D(x, y);
             BoosterEntity booster;
 
-            if (random.nextBoolean()) {
-                booster = new Spring(locatie, uppie);
-            } else {
-                booster = new Trampoline(locatie, uppie);
-            }
+            if (y != previousY) {
+                if (random.nextBoolean()) {
+                    booster = new Spring(locatie, uppie);
+                } else {
+                    booster = new Trampoline(locatie, uppie);
+                }
 
-            boosterLijst.add(booster);
-            spawn(booster);
+                boosterLijst.add(booster);
+                spawn(booster);
+                previousY = y;
+            }
         }
     }
 }
