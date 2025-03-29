@@ -45,6 +45,7 @@ public class GameLevel extends DynamicScene implements EntitySpawnerContainer {
         uppie.setViewOrder(1);
         uppie.setPlatforms(platformenLijst);
         uppie.setBoosters(boosterLijst);
+
         uppie.setMonsters(monsterLijst);
 
         uppie.setScoreText(scoreText);
