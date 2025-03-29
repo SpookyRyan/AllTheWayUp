@@ -28,7 +28,6 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
     private double gravityStep = 0.1;
     private List<Collider> platforms;
     private List<Collider> boosterLijst;
-
     private List<Collider> monsterLijst;
     private double vorigeY;
     private int score = 0;
