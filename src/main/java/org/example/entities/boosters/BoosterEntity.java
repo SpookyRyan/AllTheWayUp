@@ -3,9 +3,8 @@ package org.example.entities.boosters;
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.entities.impl.SpriteEntity;
-import com.github.hanyaeger.api.entities.Collided;
 import com.github.hanyaeger.api.entities.Collider;
-import org.example.entities.speler.Uppie;
+import org.example.entities.player.Uppie;
 
 public abstract class BoosterEntity extends SpriteEntity implements Collider {
 
@@ -18,7 +17,7 @@ public abstract class BoosterEntity extends SpriteEntity implements Collider {
 
     public abstract void boostUpwards();
 
-    public void moveDown(double hoeveelheid) {
-        setAnchorLocationY(getAnchorLocation().getY() + hoeveelheid);
+    public void moveDown(double amount) {
+        setAnchorLocationY(getAnchorLocation().getY() + amount);
     }
 }

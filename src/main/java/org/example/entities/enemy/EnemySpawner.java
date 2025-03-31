@@ -15,13 +15,13 @@ public class EnemySpawner extends EntitySpawner {
     private final Random random = new Random();
     private final int maxAmountOfEnemies = 4;
     private int amountOfEnemiesPlaced = 0;
-    private final List<Collider> monsterLijst;
+    private final List<Collider> monsterList;
 
-    public EnemySpawner(long intervalInMs, double sceneWidth, double sceneHeight, List<Collider> monsterLijst, AllTheWayUp game ) {
+    public EnemySpawner(long intervalInMs, double sceneWidth, double sceneHeight, List<Collider> monsterList, AllTheWayUp game ) {
         super(intervalInMs);
         this.sceneWidth = sceneWidth;
         this.sceneHeight = sceneHeight;
-        this.monsterLijst = monsterLijst;
+        this.monsterList = monsterList;
         this.game = game;
     }
 
@@ -30,13 +30,13 @@ public class EnemySpawner extends EntitySpawner {
         double x = random.nextDouble() * (sceneWidth - 60 * 2) + 60;
         double y = -5000 + random.nextDouble() * (sceneHeight + 5000 - 80);
 
-        Coordinate2D nieuweLocatie = new Coordinate2D(x, y);
+        Coordinate2D newLocation = new Coordinate2D(x, y);
 
         if (amountOfEnemiesPlaced < maxAmountOfEnemies) {
-            Monster monster = new Monster(nieuweLocatie, game);
+            Monster monster = new Monster(newLocation, game);
             spawn(monster);
             amountOfEnemiesPlaced++;
-            monsterLijst.add(monster);
+            monsterList.add(monster);
         }
 
 

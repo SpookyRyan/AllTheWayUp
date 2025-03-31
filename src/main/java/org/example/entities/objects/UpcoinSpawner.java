@@ -1,12 +1,7 @@
 package org.example.entities.objects;
 
 import com.github.hanyaeger.api.Coordinate2D;
-import com.github.hanyaeger.api.entities.Collider;
 import com.github.hanyaeger.api.entities.EntitySpawner;
-import org.example.entities.boosters.BoosterEntity;
-import org.example.entities.boosters.Spring;
-import org.example.entities.boosters.Trampoline;
-import org.example.entities.speler.Uppie;
 
 import java.util.List;
 import java.util.Random;
@@ -15,14 +10,14 @@ import java.util.Random;
 public class UpcoinSpawner extends EntitySpawner {
     private final double sceneWidth;
     private final Random random;
-    private final List<Upcoin> upcoinLijst;
+    private final List<Upcoin> upcoinList;
     private double previousY;
 
-    public UpcoinSpawner(long intervalInMs, double sceneWidth, List<Upcoin> upcoinLijst) {
+    public UpcoinSpawner(long intervalInMs, double sceneWidth, List<Upcoin> upcoinList) {
         super(intervalInMs);
         this.sceneWidth = sceneWidth;
         this.random = new Random();
-        this.upcoinLijst = upcoinLijst;
+        this.upcoinList = upcoinList;
     }
 
     @Override
@@ -37,7 +32,7 @@ public class UpcoinSpawner extends EntitySpawner {
 
                 upcoin = new Upcoin(locatie);
 
-                upcoinLijst.add(upcoin);
+                upcoinList.add(upcoin);
                 spawn(upcoin);
                 previousY = y;
             }

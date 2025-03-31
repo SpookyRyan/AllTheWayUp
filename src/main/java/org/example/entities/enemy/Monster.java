@@ -4,12 +4,9 @@ import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.entities.Collided;
 import com.github.hanyaeger.api.entities.Collider;
-import com.github.hanyaeger.api.entities.SceneBorderCrossingWatcher;
-import com.github.hanyaeger.api.entities.SceneBorderTouchingWatcher;
 import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
-import com.github.hanyaeger.api.scenes.SceneBorder;
 import org.example.AllTheWayUp;
-import org.example.entities.speler.UppieHitBox;
+import org.example.entities.player.UppieHitBox;
 
 import java.util.List;
 
@@ -30,8 +27,8 @@ public class Monster extends DynamicSpriteEntity implements Collided, Collider {
         }
     }
 
-    public void moveDown(double hoeveelheid) {
-        setAnchorLocationY(getAnchorLocation().getY() + hoeveelheid);
+    public void moveDown(double amount) {
+        setAnchorLocationY(getAnchorLocation().getY() + amount);
     }
 
 }

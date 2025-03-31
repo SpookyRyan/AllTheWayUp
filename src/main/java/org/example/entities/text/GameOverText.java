@@ -5,7 +5,7 @@ import com.github.hanyaeger.api.entities.impl.TextEntity;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import org.example.entities.speler.Uppie;
+import org.example.entities.player.Uppie;
 
 public class GameOverText extends TextEntity {
     private Uppie uppie;

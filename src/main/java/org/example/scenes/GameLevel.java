@@ -9,8 +9,8 @@ import org.example.entities.boosters.BoosterSpawner;
 import org.example.entities.enemy.EnemySpawner;
 import org.example.entities.objects.Upcoin;
 import org.example.entities.objects.UpcoinSpawner;
-import org.example.entities.platformen.PlatformSpawner;
-import org.example.entities.speler.Uppie;
+import org.example.entities.platforms.PlatformSpawner;
+import org.example.entities.player.Uppie;
 import org.example.entities.text.ScoreText;
 import org.example.entities.text.UpcoinScoreText;
 
@@ -19,10 +19,10 @@ import java.util.List;
 
 public class GameLevel extends DynamicScene implements EntitySpawnerContainer {
     private AllTheWayUp game;
-    private List<Collider> platformenLijst = new ArrayList<>();
-    private List<Collider> boosterLijst = new ArrayList<>();
-    private List<Collider> monsterLijst = new ArrayList<>();
-    private List<Upcoin> upcoinLijst = new ArrayList<>();
+    private List<Collider> platformenList = new ArrayList<>();
+    private List<Collider> boosterList = new ArrayList<>();
+    private List<Collider> monsterList = new ArrayList<>();
+    private List<Upcoin> upcoinList = new ArrayList<>();
     private Uppie uppie;
 
     public GameLevel(AllTheWayUp game) {
@@ -48,10 +48,10 @@ public class GameLevel extends DynamicScene implements EntitySpawnerContainer {
 
         uppie = new Uppie(new Coordinate2D(250, 700), game);
         uppie.setViewOrder(1);
-        uppie.setPlatforms(platformenLijst);
-        uppie.setBoosters(boosterLijst);
-        uppie.setMonsters(monsterLijst);
-        uppie.setUpcoins(upcoinLijst);
+        uppie.setPlatforms(platformenList);
+        uppie.setBoosters(boosterList);
+        uppie.setMonsters(monsterList);
+        uppie.setUpcoins(upcoinList);
 
         uppie.setScoreText(scoreText);
         uppie.setUpcoinScoreText(upcoinScoreText);
@@ -61,18 +61,18 @@ public class GameLevel extends DynamicScene implements EntitySpawnerContainer {
 
     @Override
     public void setupEntitySpawners() {
-        PlatformSpawner spawner = new PlatformSpawner(10, getWidth(), getHeight(), platformenLijst);
+        PlatformSpawner spawner = new PlatformSpawner(10, getWidth(), getHeight(), platformenList);
         addEntitySpawner(spawner);
-        uppie.setBoosters(boosterLijst);
+        uppie.setBoosters(boosterList);
 
-        BoosterSpawner boosterSpawner = new BoosterSpawner(500, getWidth(), uppie, boosterLijst);
+        BoosterSpawner boosterSpawner = new BoosterSpawner(10, getWidth(), uppie, boosterList);
         addEntitySpawner(boosterSpawner);
 
-        EnemySpawner enemySpawner = new EnemySpawner(10, getWidth(), getHeight(), monsterLijst, game);
+        EnemySpawner enemySpawner = new EnemySpawner(10, getWidth(), getHeight(), monsterList, game);
         addEntitySpawner(enemySpawner);
-        uppie.setMonsters(monsterLijst);
+        uppie.setMonsters(monsterList);
 
-        UpcoinSpawner upcoinSpawner = new UpcoinSpawner(1000, getWidth(), upcoinLijst);
+        UpcoinSpawner upcoinSpawner = new UpcoinSpawner(1000, getWidth(), upcoinList);
         addEntitySpawner(upcoinSpawner);
     }
 }

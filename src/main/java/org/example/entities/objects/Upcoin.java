@@ -6,8 +6,8 @@ import com.github.hanyaeger.api.entities.Collided;
 import com.github.hanyaeger.api.entities.Collider;
 import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
 import com.github.hanyaeger.api.media.SoundClip;
-import org.example.entities.speler.Uppie;
-import org.example.entities.speler.UppieHitBox;
+import org.example.entities.player.Uppie;
+import org.example.entities.player.UppieHitBox;
 
 import java.util.List;
 

@@ -2,7 +2,7 @@ package org.example.entities.boosters;
 
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.Size;
-import org.example.entities.speler.Uppie;
+import org.example.entities.player.Uppie;
 
 public class Spring extends BoosterEntity {
 
