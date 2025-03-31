@@ -56,6 +56,9 @@ public class PlatformSpawner extends EntitySpawner {
             startOfGame = false;
         }
 
+
+
+
         while (platformsPlaced < amountOfPlatforms) {
             double x = random.nextDouble() * (sceneWidth - 60 * 2) + 60;
             double y = -5000 + random.nextDouble() * (sceneHeight + 5000 - 80);
