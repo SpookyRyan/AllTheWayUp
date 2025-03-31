@@ -24,7 +24,7 @@ public class HomeButton extends TextEntity implements MouseButtonPressedListener
 
     @Override
     public void onMouseButtonPressed(MouseButton button, Coordinate2D coordinate2D){
-
+        game.setActiveScene(0);
     }
 
     @Override
