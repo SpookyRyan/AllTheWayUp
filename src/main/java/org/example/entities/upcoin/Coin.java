@@ -1,4 +1,4 @@
-package org.example.entities.objects;
+package org.example.entities.upcoin;
 
 public interface Coin {
     void collect();

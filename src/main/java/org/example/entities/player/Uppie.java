@@ -9,10 +9,11 @@ import com.github.hanyaeger.api.scenes.SceneBorder;
 import com.github.hanyaeger.api.userinput.KeyListener;
 import javafx.scene.input.KeyCode;
 import org.example.AllTheWayUp;
+import org.example.entities.Moveable;
 import org.example.entities.UpcoinManager;
 import org.example.entities.boosters.BoosterEntity;
 import org.example.entities.enemy.Monster;
-import org.example.entities.objects.Upcoin;
+import org.example.entities.upcoin.Upcoin;
 import org.example.entities.platforms.Platform;
 import org.example.entities.platforms.PlatformSpawner;
 import org.example.entities.text.ScoreText;
@@ -31,7 +32,7 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
     private List<Collider> platforms;
     private List<Collider> boosterList;
     private List<Collider> monsterList;
-    private List<Upcoin> upcoinList;
+    private List<Collider> upcoinList;
     private double previousY;
     private static int score = 0;
     private ScoreText scoreText;
@@ -134,35 +135,23 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
                 platformSpawner.updatePlatformLocation(verschil);
             }
 
-
-            for (Collider collider : platforms) {
-                if (collider instanceof Platform) {
-                    ((Platform) collider).moveDown(verschil);
-                }
-            }
-
-            for (Collider collider : boosterList) {
-                if (collider instanceof BoosterEntity) {
-                    ((BoosterEntity) collider).moveDown(verschil);
-                }
-            }
-
-            for (Collider collider : monsterList) {
-                if (collider instanceof Monster) {
-                    ((Monster) collider).moveDown(verschil);
-                }
-            }
-
-            for (Collider collider : upcoinList) {
-                if (collider instanceof Upcoin) {
-                    ((Upcoin) collider).moveDown(verschil);
-                }
-            }
+            moveObjectsDown(platforms, verschil);
+            moveObjectsDown(boosterList, verschil);
+            moveObjectsDown(monsterList, verschil);
+            moveObjectsDown(upcoinList, verschil);
 
         } else {
             gravityStep = 0.1;
         }
         previousY = getY();
+    }
+
+    private void moveObjectsDown(List<Collider> list, double difference) {
+        for (Collider collider : list) {
+            if (collider instanceof Moveable moveable) {
+                moveable.moveDown(difference);
+            }
+        }
     }
 
     @Override
@@ -200,7 +189,7 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
         this.monsterList = monsters;
     }
 
-    public void setUpcoins(List<Upcoin> upcoins) {
+    public void setUpcoins(List<Collider> upcoins) {
         this.upcoinList = upcoins;
     }
 

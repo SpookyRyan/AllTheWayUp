@@ -6,8 +6,9 @@ import com.github.hanyaeger.api.entities.Collider;
 import com.github.hanyaeger.api.entities.SceneBorderCrossingWatcher;
 import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
 import com.github.hanyaeger.api.scenes.SceneBorder;
+import org.example.entities.Moveable;
 
-public class Platform extends DynamicSpriteEntity implements Collider, SceneBorderCrossingWatcher {
+public class Platform extends DynamicSpriteEntity implements Collider, SceneBorderCrossingWatcher, Moveable {
     private PlatformHitBox hitbox;
     private boolean removed = false;
     private Coordinate2D locatie;
@@ -17,6 +18,7 @@ public class Platform extends DynamicSpriteEntity implements Collider, SceneBord
         this.locatie = initialLocation;
     }
 
+    @Override
     public void moveDown(double amount) {
         setAnchorLocationY(getAnchorLocation().getY() + amount);
 

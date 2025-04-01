@@ -7,8 +7,8 @@ import com.github.hanyaeger.api.scenes.DynamicScene;
 import org.example.AllTheWayUp;
 import org.example.entities.boosters.BoosterSpawner;
 import org.example.entities.enemy.EnemySpawner;
-import org.example.entities.objects.Upcoin;
-import org.example.entities.objects.CoinSpawner;
+import org.example.entities.upcoin.Upcoin;
+import org.example.entities.upcoin.CoinSpawner;
 import org.example.entities.platforms.PlatformSpawner;
 import org.example.entities.player.Uppie;
 import org.example.entities.text.ScoreText;
@@ -22,7 +22,7 @@ public class GameLevel extends DynamicScene implements EntitySpawnerContainer {
     private List<Collider> platformenList = new ArrayList<>();
     private List<Collider> boosterList = new ArrayList<>();
     private List<Collider> monsterList = new ArrayList<>();
-    private List<Upcoin> upcoinList = new ArrayList<>();
+    private List<Collider> upcoinList = new ArrayList<>();
     private Uppie uppie;
 
     public GameLevel(AllTheWayUp game) {
