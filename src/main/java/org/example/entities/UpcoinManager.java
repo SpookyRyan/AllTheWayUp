@@ -3,8 +3,8 @@ package org.example.entities;
 import java.io.*;
 import java.nio.file.*;
 
-// Deze code is een manager voor het opslaan en laden van de highscore van het spel, deze is van het internet door verschillende Github
-//gebruikers aangemaakt en dus NIET onze eigen code
+// Deze code is een manager voor het opslaan en laden van de highscore van het spel, deze is van het internet door verschillende StackOverflow
+// code gemaakt en met AI verbeterd.
 
 public class UpcoinManager {
     private static final String FILENAME = System.getProperty("user.home") + "/.uppie_upcoin.txt";
