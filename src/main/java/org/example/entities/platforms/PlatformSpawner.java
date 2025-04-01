@@ -32,14 +32,6 @@ public class PlatformSpawner extends EntitySpawner {
     @Override
     protected void spawnEntities() {
 
-//        platformenLijst.removeIf(p -> {
-//            if (p instanceof Platform && ((Platform) p).isRemoved()) {
-//                platformLocaties.remove(((Platform) p).getLocatie());
-//                return true;
-//            }
-//            return false;
-//        });
-
         if (startOfGame) {
             for (int x = 0; x <= sceneWidth; x += 60) {
                 Coordinate2D locatie = new Coordinate2D(x, sceneHeight - 20);
@@ -56,9 +48,6 @@ public class PlatformSpawner extends EntitySpawner {
             }
             startOfGame = false;
         }
-
-
-
 
         while (platformsPlaced < amountOfPlatforms) {
             double x = random.nextDouble() * (sceneWidth - 60 * 2) + 60;
@@ -91,9 +80,7 @@ public class PlatformSpawner extends EntitySpawner {
 
 
             Coordinate2D nieuweLocatie = new Coordinate2D(x, y);
-
             if (!isOverLapping(nieuweLocatie)) {
-                System.out.println("Limit");
                 if (random.nextDouble() < 0.8) {
                     NormalPlatform platform = new NormalPlatform(nieuweLocatie, new Size(60, 40));
                     spawn(platform);
