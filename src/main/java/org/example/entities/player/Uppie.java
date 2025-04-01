@@ -24,6 +24,7 @@ import java.util.Set;
 
 public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossingWatcher, KeyListener, TimerContainer, Newtonian, Collided {
     private final AllTheWayUp game;
+    private PlatformSpawner platformSpawner;
     private static boolean isInJump = false;
     private double currentGravity = 0;
     private final double jumpStartGravity = -2.7;
@@ -209,8 +210,6 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
     public void setIsInJump(boolean isJumping) {
         isInJump = isJumping;
     }
-
-    private PlatformSpawner platformSpawner;
 
     public void setPlatformSpawner(PlatformSpawner platformSpawner) {
         this.platformSpawner = platformSpawner;

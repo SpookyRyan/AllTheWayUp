@@ -4,7 +4,7 @@ import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.entities.impl.SpriteEntity;
 import com.github.hanyaeger.api.entities.Collider;
-import com.github.hanyaeger.core.entities.motion.Movable;
+//import com.github.hanyaeger.core.entities.motion.Movable;
 import org.example.entities.Moveable;
 import org.example.entities.player.Uppie;
 

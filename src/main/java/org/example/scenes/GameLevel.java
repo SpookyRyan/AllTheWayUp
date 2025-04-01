@@ -52,6 +52,7 @@ public class GameLevel extends DynamicScene implements EntitySpawnerContainer {
         uppie.setBoosters(boosterList);
         uppie.setMonsters(monsterList);
         uppie.setUpcoins(upcoinList);
+        uppie.setBoosters(boosterList);
 
         uppie.setScoreText(scoreText);
         uppie.setUpcoinScoreText(upcoinScoreText);
@@ -64,14 +65,12 @@ public class GameLevel extends DynamicScene implements EntitySpawnerContainer {
         PlatformSpawner spawner = new PlatformSpawner(10, getWidth(), getHeight(), platformenList);
         addEntitySpawner(spawner);
         uppie.setPlatformSpawner(spawner);
-        uppie.setBoosters(boosterList);
 
         BoosterSpawner boosterSpawner = new BoosterSpawner(10, getWidth(), uppie, boosterList);
         addEntitySpawner(boosterSpawner);
 
-        EnemySpawner enemySpawner = new EnemySpawner(10, getWidth(), getHeight(), monsterList, game);
+        EnemySpawner enemySpawner = new EnemySpawner(10, getWidth(), monsterList, game);
         addEntitySpawner(enemySpawner);
-        uppie.setMonsters(monsterList);
 
         CoinSpawner upcoinSpawner = new CoinSpawner(1000, getWidth(), upcoinList);
         addEntitySpawner(upcoinSpawner);
