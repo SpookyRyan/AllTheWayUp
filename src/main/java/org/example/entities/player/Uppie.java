@@ -13,6 +13,7 @@ import org.example.entities.boosters.BoosterEntity;
 import org.example.entities.enemy.Monster;
 import org.example.entities.objects.Upcoin;
 import org.example.entities.platforms.Platform;
+import org.example.entities.platforms.PlatformSpawner;
 import org.example.entities.text.ScoreText;
 import org.example.entities.text.UpcoinScoreText;
 
@@ -126,6 +127,11 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
             setAnchorLocationY(limit);
             isInLimit = true;
 
+            if (platformSpawner != null) {
+                platformSpawner.verplaatsPlatformLocatiesNaarBeneden(verschil);
+            }
+
+
             for (Collider collider : platforms) {
                 if (collider instanceof Platform) {
                     ((Platform) collider).moveDown(verschil);
@@ -209,6 +215,13 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
     public void setIsInJump(boolean isJumping) {
         isInJump = isJumping;
     }
+
+    private PlatformSpawner platformSpawner;
+
+    public void setPlatformSpawner(PlatformSpawner platformSpawner) {
+        this.platformSpawner = platformSpawner;
+    }
+
 
     public static boolean getIsInJump(){
         return isInJump;

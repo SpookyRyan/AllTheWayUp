@@ -63,6 +63,7 @@ public class GameLevel extends DynamicScene implements EntitySpawnerContainer {
     public void setupEntitySpawners() {
         PlatformSpawner spawner = new PlatformSpawner(10, getWidth(), getHeight(), platformenList);
         addEntitySpawner(spawner);
+        uppie.setPlatformSpawner(spawner);
         uppie.setBoosters(boosterList);
 
         BoosterSpawner boosterSpawner = new BoosterSpawner(10, getWidth(), uppie, boosterList);

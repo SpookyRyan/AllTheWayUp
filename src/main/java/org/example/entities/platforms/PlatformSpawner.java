@@ -4,6 +4,7 @@ import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.entities.Collider;
 import com.github.hanyaeger.api.entities.EntitySpawner;
+import org.example.entities.player.Uppie;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ public class PlatformSpawner extends EntitySpawner {
     private final Random random;
     private int platformsPlaced = 0;
     private final List<Coordinate2D> platformLocaties = new ArrayList<>();
-    private int amountOfPlatforms = 110;
+    private int amountOfPlatforms = 15;
     private boolean startOfGame = true;
     private final List<Collider> platformenList;
 
@@ -61,7 +62,7 @@ public class PlatformSpawner extends EntitySpawner {
 
         while (platformsPlaced < amountOfPlatforms) {
             double x = random.nextDouble() * (sceneWidth - 60 * 2) + 60;
-            double y = -5000 + random.nextDouble() * (sceneHeight + 5000 - 80);
+            double y = random.nextDouble() * (sceneHeight - 80);
 
             Coordinate2D nieuweLocatie = new Coordinate2D(x, y);
 
@@ -84,6 +85,34 @@ public class PlatformSpawner extends EntitySpawner {
             }
         }
 
+        if(Uppie.getIsInLimit()){
+            double x = random.nextDouble() * (sceneWidth - 60 * 2) + 60;
+            double y = -50 - random.nextDouble() * 100;
+
+
+            Coordinate2D nieuweLocatie = new Coordinate2D(x, y);
+
+            if (!isOverLapping(nieuweLocatie)) {
+                System.out.println("Limit");
+                if (random.nextDouble() < 0.8) {
+                    NormalPlatform platform = new NormalPlatform(nieuweLocatie, new Size(60, 40));
+                    spawn(platform);
+                    platformenList.add(platform);
+
+                    PlatformHitBox hitbox = new PlatformHitBox(nieuweLocatie, "Normal");
+                    platform.setHitbox(hitbox);
+                    spawn(hitbox);
+                } else {
+                    BrokenPlatform platform = new BrokenPlatform(nieuweLocatie, new Size(60, 40));
+                    spawn(platform);
+                    platformenList.add(platform);
+                }
+                platformLocaties.add(nieuweLocatie);
+                platformsPlaced++;
+            }
+
+        }
+
     }
 
     private boolean isOverLapping(Coordinate2D nieuweLocatie) {
@@ -94,4 +123,13 @@ public class PlatformSpawner extends EntitySpawner {
         }
         return false;
     }
+
+    public void verplaatsPlatformLocatiesNaarBeneden(double verschil) {
+        for (int i = 0; i < platformLocaties.size(); i++) {
+            Coordinate2D oudeLocatie = platformLocaties.get(i);
+            Coordinate2D nieuweLocatie = new Coordinate2D(oudeLocatie.getX(), oudeLocatie.getY() + verschil);
+            platformLocaties.set(i, nieuweLocatie);
+        }
+    }
+
 }
