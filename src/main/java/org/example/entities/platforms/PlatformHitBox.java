@@ -31,4 +31,7 @@ public class PlatformHitBox extends RectangleEntity implements Collider, Collide
             }
         }
     }
+
+
+
 }

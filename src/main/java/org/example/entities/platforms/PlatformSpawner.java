@@ -31,7 +31,6 @@ public class PlatformSpawner extends EntitySpawner {
 
     @Override
     protected void spawnEntities() {
-
         if (startOfGame) {
             for (int x = 0; x <= sceneWidth; x += 60) {
                 Coordinate2D locatie = new Coordinate2D(x, sceneHeight - 20);
@@ -100,6 +99,14 @@ public class PlatformSpawner extends EntitySpawner {
 
         }
 
+        for(int i = 0; i < platformLocaties.size(); i++) {
+            Coordinate2D locatie = platformLocaties.get(i);
+            if (locatie.getY() > sceneHeight) {
+                platformLocaties.remove(i);
+                platformsPlaced--;
+                break;
+            }
+        }
     }
 
     private boolean isOverLapping(Coordinate2D nieuweLocatie) {
@@ -118,5 +125,4 @@ public class PlatformSpawner extends EntitySpawner {
             platformLocaties.set(i, newLocation);
         }
     }
-
 }

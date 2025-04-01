@@ -93,7 +93,6 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
         addTimer(new Timer(10) {
             @Override
             public void onAnimationUpdate(long timestamp) {
-
                 jumpAutomatically();
             }
         });

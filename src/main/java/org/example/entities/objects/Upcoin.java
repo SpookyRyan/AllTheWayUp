@@ -48,9 +48,4 @@ public class Upcoin extends DynamicSpriteEntity implements Collider, Collided, C
         setAnchorLocationY(getAnchorLocation().getY() + amount);
     }
 
-
-
-
-
-
 }
