@@ -31,21 +31,4 @@ public class PlatformHitBox extends RectangleEntity implements Collider, Collide
             }
         }
     }
-
-//    @Override
-//    public void notifyBoundaryCrossing(SceneBorder sceneBorder) {
-//        if(sceneBorder.equals(SceneBorder.BOTTOM)) {
-//            remove();
-//        }
-//    }
-
-//    @Override
-//    public void setMotionApplier(MotionApplier motionApplier) {
-//
-//    }
-//
-//    @Override
-//    public MotionApplier getMotionApplier() {
-//        return null;
-//    }
 }

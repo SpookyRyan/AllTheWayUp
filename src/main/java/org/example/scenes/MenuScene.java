@@ -5,6 +5,7 @@ import com.github.hanyaeger.api.scenes.StaticScene;
 import org.example.AllTheWayUp;
 import org.example.entities.button.LockerButton;
 import org.example.entities.button.StartButton;
+import org.example.entities.text.TotalUpcoinScoreText;
 
 
 public class MenuScene extends StaticScene {
@@ -25,6 +26,8 @@ public class MenuScene extends StaticScene {
     public void setupEntities() {
         addEntity(new StartButton(new Coordinate2D(180, 200), game));
         addEntity(new LockerButton(new Coordinate2D(105, 300), game));
+        TotalUpcoinScoreText playerCoins = new TotalUpcoinScoreText(new Coordinate2D(170, 730));
+        addEntity(playerCoins);
     }
 
 }

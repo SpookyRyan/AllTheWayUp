@@ -9,10 +9,12 @@ import com.github.hanyaeger.api.scenes.SceneBorder;
 import com.github.hanyaeger.api.userinput.KeyListener;
 import javafx.scene.input.KeyCode;
 import org.example.AllTheWayUp;
+import org.example.entities.UpcoinManager;
 import org.example.entities.boosters.BoosterEntity;
 import org.example.entities.enemy.Monster;
 import org.example.entities.objects.Upcoin;
 import org.example.entities.platforms.Platform;
+import org.example.entities.platforms.PlatformSpawner;
 import org.example.entities.text.ScoreText;
 import org.example.entities.text.UpcoinScoreText;
 
@@ -31,12 +33,12 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
     private List<Collider> monsterList;
     private List<Upcoin> upcoinList;
     private double previousY;
-    private int score = 0;
+    private static int score = 0;
     private ScoreText scoreText;
     private static UpcoinScoreText upcoinScoreText;
     private static int upcoinScore = 0;
-    private static int finalScore = 0;
     public static boolean isInLimit;
+    public static int playerUpcoins = UpcoinManager.loadHighscore();
 
     public Uppie(Coordinate2D initialLocation, AllTheWayUp game) {
         super(initialLocation);
@@ -54,13 +56,14 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
     protected void setupEntities() {
         addEntity(new UppieSprite(new Coordinate2D(0, 0), new Size(50, 50)));
         addEntity(new UppieHitBox(new Coordinate2D(0, 45)));
+        upcoinScore = 0;
+        score = 0;
     }
 
 
     @Override
     public void notifyBoundaryCrossing(SceneBorder sceneBorder) {
         if (sceneBorder == SceneBorder.BOTTOM) {
-            finalScore = score;
             game.setActiveScene(2);
 
         }
@@ -128,6 +131,11 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
             setAnchorLocationY(limit);
             isInLimit = true;
 
+            if (platformSpawner != null) {
+                platformSpawner.updatePlatformLocation(verschil);
+            }
+
+
             for (Collider collider : platforms) {
                 if (collider instanceof Platform) {
                     ((Platform) collider).moveDown(verschil);
@@ -172,6 +180,8 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
 
     public static void increaseUpcoinScore() {
         upcoinScore++;
+        playerUpcoins++;
+        UpcoinManager.saveHighscore(playerUpcoins);
         upcoinScoreText.setUpcoinScoreText(upcoinScore);
     }
 
@@ -212,6 +222,13 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
         isInJump = isJumping;
     }
 
+    private PlatformSpawner platformSpawner;
+
+    public void setPlatformSpawner(PlatformSpawner platformSpawner) {
+        this.platformSpawner = platformSpawner;
+    }
+
+
     public static boolean getIsInJump(){
         return isInJump;
     }
@@ -222,7 +239,7 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
 
 
     public static int getFinalScore() {
-        return finalScore;
+        return score;
     }
 
     public static int getFinalUpcoinScore() {
