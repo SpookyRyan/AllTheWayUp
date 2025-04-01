@@ -9,6 +9,7 @@ import com.github.hanyaeger.api.scenes.SceneBorder;
 import com.github.hanyaeger.api.userinput.KeyListener;
 import javafx.scene.input.KeyCode;
 import org.example.AllTheWayUp;
+import org.example.entities.UpcoinManager;
 import org.example.entities.boosters.BoosterEntity;
 import org.example.entities.enemy.Monster;
 import org.example.entities.objects.Upcoin;
@@ -37,6 +38,7 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
     private static UpcoinScoreText upcoinScoreText;
     private static int upcoinScore = 0;
     public static boolean isInLimit;
+    public static int playerUpcoins = UpcoinManager.loadHighscore();
 
     public Uppie(Coordinate2D initialLocation, AllTheWayUp game) {
         super(initialLocation);
