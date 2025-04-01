@@ -1,4 +1,4 @@
-package org.example.entities.platformen;
+package org.example.entities.platforms;
 
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.Size;
@@ -12,16 +12,16 @@ public class Platform extends DynamicSpriteEntity implements Collider, SceneBord
     private boolean removed = false;
     private Coordinate2D locatie;
 
-    public Platform(String afbeelding, Coordinate2D initialLocation, Size grootte) {
-        super(afbeelding, initialLocation, grootte);
+    public Platform(String afbeelding, Coordinate2D initialLocation, Size size) {
+        super(afbeelding, initialLocation, size);
         this.locatie = initialLocation;
     }
 
-    public void moveDown(double hoeveelheid) {
-        setAnchorLocationY(getAnchorLocation().getY() + hoeveelheid);
+    public void moveDown(double amount) {
+        setAnchorLocationY(getAnchorLocation().getY() + amount);
 
         if (hitbox != null) {
-            hitbox.setAnchorLocationY(hitbox.getAnchorLocation().getY() + hoeveelheid);
+            hitbox.setAnchorLocationY(hitbox.getAnchorLocation().getY() + amount);
         }
     }
 

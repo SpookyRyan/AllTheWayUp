@@ -1,11 +1,11 @@
-package org.example.entities.platformen;
+package org.example.entities.platforms;
 
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.entities.Collided;
 import com.github.hanyaeger.api.entities.Collider;
-import org.example.entities.speler.Uppie;
-import org.example.entities.speler.UppieHitBox;
+import org.example.entities.player.Uppie;
+import org.example.entities.player.UppieHitBox;
 
 import java.util.List;
 

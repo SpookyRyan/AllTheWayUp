@@ -1,4 +1,4 @@
-package org.example.entities.speler;
+package org.example.entities.player;
 
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.Size;
@@ -12,7 +12,7 @@ import org.example.AllTheWayUp;
 import org.example.entities.boosters.BoosterEntity;
 import org.example.entities.enemy.Monster;
 import org.example.entities.objects.Upcoin;
-import org.example.entities.platformen.Platform;
+import org.example.entities.platforms.Platform;
 import org.example.entities.text.ScoreText;
 import org.example.entities.text.UpcoinScoreText;
 
@@ -27,15 +27,16 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
     private final double maxGravity = 2;
     private double gravityStep = 0.1;
     private List<Collider> platforms;
-    private List<Collider> boosterLijst;
-    private List<Collider> monsterLijst;
-    private List<Upcoin> upcoinLijst;
-    private double vorigeY;
+    private List<Collider> boosterList;
+    private List<Collider> monsterList;
+    private List<Upcoin> upcoinList;
+    private double previousY;
     private int score = 0;
     private ScoreText scoreText;
     private static UpcoinScoreText upcoinScoreText;
     private static int upcoinScore = 0;
     private static int finalScore = 0;
+    public static boolean isInLimit;
 
     public Uppie(Coordinate2D initialLocation, AllTheWayUp game) {
         super(initialLocation);
@@ -44,7 +45,7 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
         setGravityConstant(1);
         setFrictionConstant(0.3);
 
-        this.vorigeY = getAnchorLocation().getY();
+        this.previousY = getAnchorLocation().getY();
 
     }
 
@@ -114,50 +115,18 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
         checkOfUppieBovenLimitIs(platforms);
     }
 
-    public static boolean getIsInJump(){
-        return isInJump;
-    }
-
-    public void setPlatforms(List<Collider> platforms) {
-        this.platforms = platforms;
-    }
-
-    public void setBoosters(List<Collider> boosters) {
-        this.boosterLijst = boosters;
-    }
-
-    public void setMonsters(List<Collider> monsters) {
-        this.monsterLijst = monsters;
-    }
-
-    public void setUpcoins(List<Upcoin> upcoins) {
-        this.upcoinLijst = upcoins;
-    }
-
-    public int getY(){
-        return (int) getAnchorLocation().getY();
-    }
-
-
-    public static int getFinalScore() {
-        return finalScore;
-    }
-
-    public static int getFinalUpcoinScore() {
-        return upcoinScore;
-    }
-
     public void checkOfUppieBovenLimitIs(List<Collider> list){
         if (list == null) return;
         scoreText.setScoreText(score);
         double uppieY = getY();
         double limit = 230;
 
-        if (uppieY < limit && uppieY < vorigeY) {
-            double verschil = vorigeY - uppieY;
+        if (uppieY < limit && uppieY < previousY) {
+            double verschil = previousY - uppieY;
             gravityStep = 0.15;
             score += verschil/3;
             setAnchorLocationY(limit);
+            isInLimit = true;
 
             for (Collider collider : platforms) {
                 if (collider instanceof Platform) {
@@ -165,19 +134,19 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
                 }
             }
 
-            for (Collider collider : boosterLijst) {
+            for (Collider collider : boosterList) {
                 if (collider instanceof BoosterEntity) {
                     ((BoosterEntity) collider).moveDown(verschil);
                 }
             }
 
-            for (Collider collider : monsterLijst) {
+            for (Collider collider : monsterList) {
                 if (collider instanceof Monster) {
                     ((Monster) collider).moveDown(verschil);
                 }
             }
 
-            for (Collider collider : upcoinLijst) {
+            for (Collider collider : upcoinList) {
                 if (collider instanceof Upcoin) {
                     ((Upcoin) collider).moveDown(verschil);
                 }
@@ -186,22 +155,7 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
         } else {
             gravityStep = 0.1;
         }
-        vorigeY = getY();
-    }
-
-    public void setScoreText(ScoreText scoreText) {
-        this.scoreText = scoreText;
-    }
-
-    public void setUpcoinScoreText(UpcoinScoreText upcoinScoreText) { this.upcoinScoreText = upcoinScoreText; }
-
-    public void setCurrentGravity(double gravity) {
-        this.currentGravity = gravity;
-        setGravityConstant(gravity);
-    }
-
-    public void setIsInJump(boolean isJumping) {
-        isInJump = isJumping;
+        previousY = getY();
     }
 
     @Override
@@ -219,5 +173,63 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
     public static void increaseUpcoinScore() {
         upcoinScore++;
         upcoinScoreText.setUpcoinScoreText(upcoinScore);
+    }
+
+    public static void setIsInLimit(boolean value) {
+        isInLimit = value;
+    }
+
+    public void setPlatforms(List<Collider> platforms) {
+        this.platforms = platforms;
+    }
+
+    public void setBoosters(List<Collider> boosters) {
+        this.boosterList = boosters;
+    }
+
+    public void setMonsters(List<Collider> monsters) {
+        this.monsterList = monsters;
+    }
+
+    public void setUpcoins(List<Upcoin> upcoins) {
+        this.upcoinList = upcoins;
+    }
+
+    public void setScoreText(ScoreText scoreText) {
+        this.scoreText = scoreText;
+    }
+
+    public void setUpcoinScoreText(UpcoinScoreText upcoinScoreText) {
+        this.upcoinScoreText = upcoinScoreText;
+    }
+
+    public void setCurrentGravity(double gravity) {
+        this.currentGravity = gravity;
+        setGravityConstant(gravity);
+    }
+
+    public void setIsInJump(boolean isJumping) {
+        isInJump = isJumping;
+    }
+
+    public static boolean getIsInJump(){
+        return isInJump;
+    }
+
+    public int getY(){
+        return (int) getAnchorLocation().getY();
+    }
+
+
+    public static int getFinalScore() {
+        return finalScore;
+    }
+
+    public static int getFinalUpcoinScore() {
+        return upcoinScore;
+    }
+
+    public static boolean getIsInLimit() {
+        return isInLimit;
     }
 }

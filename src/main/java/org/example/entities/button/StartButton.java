@@ -1,4 +1,4 @@
-package org.example.entities.knoppen;
+package org.example.entities.button;
 
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.entities.impl.TextEntity;
@@ -12,30 +12,30 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import org.example.AllTheWayUp;
 
-public class HomeKnop extends TextEntity implements MouseButtonPressedListener, MouseEnterListener, MouseExitListener {
+public class StartButton extends TextEntity implements MouseButtonPressedListener, MouseEnterListener, MouseExitListener {
     private AllTheWayUp game;
 
-    public HomeKnop(Coordinate2D initialLocation, AllTheWayUp game){
-        super(initialLocation,"Terug naar menu");
+    public StartButton(Coordinate2D initialLocation, AllTheWayUp game){
+        super(initialLocation,"Start Spel");
         this.game = game;
-        setFill(Color.GREEN);
-        setFont(Font.font("Roboto", FontWeight.BOLD, 25));
+        setFill(Color.PURPLE);
+        setFont(Font.font("Roboto", FontWeight.BOLD, 30));
     }
 
     @Override
     public void onMouseButtonPressed(MouseButton button, Coordinate2D coordinate2D){
-
+        game.setActiveScene(1);
     }
 
     @Override
     public void onMouseEntered(){
-        setFill(Color.GREENYELLOW);
+        setFill(Color.VIOLET);
         setCursor(Cursor.HAND);
     }
 
     @Override
     public void onMouseExited(){
-        setFill(Color.GREEN);
+        setFill(Color.PURPLE);
         setCursor(Cursor.DEFAULT);
     }
 

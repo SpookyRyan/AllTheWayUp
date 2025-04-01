@@ -1,4 +1,4 @@
-package org.example.entities.speler;
+package org.example.entities.player;
 
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.Size;

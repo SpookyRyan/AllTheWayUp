@@ -3,8 +3,8 @@ package org.example.scenes;
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.scenes.StaticScene;
 import org.example.AllTheWayUp;
-import org.example.entities.knoppen.LockerKnop;
-import org.example.entities.knoppen.StartKnop;
+import org.example.entities.button.LockerButton;
+import org.example.entities.button.StartButton;
 
 
 public class MenuScene extends StaticScene {
@@ -23,8 +23,8 @@ public class MenuScene extends StaticScene {
 
     @Override
     public void setupEntities() {
-        addEntity(new StartKnop(new Coordinate2D(180, 200), game));
-        addEntity(new LockerKnop(new Coordinate2D(105, 300), game));
+        addEntity(new StartButton(new Coordinate2D(180, 200), game));
+        addEntity(new LockerButton(new Coordinate2D(105, 300), game));
     }
 
 }
