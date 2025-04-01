@@ -178,6 +178,8 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
 
     public static void increaseUpcoinScore() {
         upcoinScore++;
+        playerUpcoins++;
+        UpcoinManager.saveHighscore(playerUpcoins);
         upcoinScoreText.setUpcoinScoreText(upcoinScore);
     }
 
