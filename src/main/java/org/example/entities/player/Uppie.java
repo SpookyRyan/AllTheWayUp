@@ -31,11 +31,10 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
     private List<Collider> monsterList;
     private List<Upcoin> upcoinList;
     private double previousY;
-    private int score = 0;
+    private static int score = 0;
     private ScoreText scoreText;
     private static UpcoinScoreText upcoinScoreText;
     private static int upcoinScore = 0;
-    private static int finalScore = 0;
     public static boolean isInLimit;
 
     public Uppie(Coordinate2D initialLocation, AllTheWayUp game) {
@@ -60,7 +59,6 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
     @Override
     public void notifyBoundaryCrossing(SceneBorder sceneBorder) {
         if (sceneBorder == SceneBorder.BOTTOM) {
-            finalScore = score;
             game.setActiveScene(2);
 
         }
@@ -222,7 +220,7 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
 
 
     public static int getFinalScore() {
-        return finalScore;
+        return score;
     }
 
     public static int getFinalUpcoinScore() {

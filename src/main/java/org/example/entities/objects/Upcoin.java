@@ -11,7 +11,7 @@ import org.example.entities.player.UppieHitBox;
 
 import java.util.List;
 
-public class Upcoin extends DynamicSpriteEntity implements Collider, Collided {
+public class Upcoin extends DynamicSpriteEntity implements Collider, Collided, Coin {
     private boolean collected = false;
 
     protected Upcoin(Coordinate2D initialLocation) {
@@ -19,21 +19,29 @@ public class Upcoin extends DynamicSpriteEntity implements Collider, Collided {
     }
 
     @Override
-    public void onCollision(List<Collider> list) {
-        if (collected){
-            return;
-        }
-        for (Collider collider : list) {
-            if (collider instanceof UppieHitBox) {
-                collected = true;
+    public void onCollision(List<Collider> colliders) {
+        if (collected) return;
 
-                var coinSound = new SoundClip("audio/coin.mp3");
-                coinSound.play();
-                Uppie.increaseUpcoinScore();
-                remove();
+        for (Collider collider : colliders) {
+            if (collider instanceof UppieHitBox) {
+                collect();
                 break;
             }
         }
+    }
+
+    @Override
+    public void collect() {
+        collected = true;
+        var coinSound = new SoundClip("audio/coin.mp3");
+        coinSound.play();
+        Uppie.increaseUpcoinScore();
+        remove();
+    }
+
+    @Override
+    public boolean isCollected() {
+        return collected;
     }
 
     public void moveDown(double amount) {

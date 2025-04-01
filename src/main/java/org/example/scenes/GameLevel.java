@@ -8,7 +8,7 @@ import org.example.AllTheWayUp;
 import org.example.entities.boosters.BoosterSpawner;
 import org.example.entities.enemy.EnemySpawner;
 import org.example.entities.objects.Upcoin;
-import org.example.entities.objects.UpcoinSpawner;
+import org.example.entities.objects.CoinSpawner;
 import org.example.entities.platforms.PlatformSpawner;
 import org.example.entities.player.Uppie;
 import org.example.entities.text.ScoreText;
@@ -72,7 +72,7 @@ public class GameLevel extends DynamicScene implements EntitySpawnerContainer {
         addEntitySpawner(enemySpawner);
         uppie.setMonsters(monsterList);
 
-        UpcoinSpawner upcoinSpawner = new UpcoinSpawner(1000, getWidth(), upcoinList);
+        CoinSpawner upcoinSpawner = new CoinSpawner(1000, getWidth(), upcoinList);
         addEntitySpawner(upcoinSpawner);
     }
 }
