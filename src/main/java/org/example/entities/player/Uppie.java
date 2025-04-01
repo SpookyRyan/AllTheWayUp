@@ -36,6 +36,7 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
     private static UpcoinScoreText upcoinScoreText;
     private static int upcoinScore = 0;
     public static boolean isInLimit;
+    public static int playerUpcoins;
 
     public Uppie(Coordinate2D initialLocation, AllTheWayUp game) {
         super(initialLocation);
@@ -53,6 +54,8 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
     protected void setupEntities() {
         addEntity(new UppieSprite(new Coordinate2D(0, 0), new Size(50, 50)));
         addEntity(new UppieHitBox(new Coordinate2D(0, 45)));
+        score = 0;
+        upcoinScore = 0;
     }
 
 
@@ -170,6 +173,7 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
 
     public static void increaseUpcoinScore() {
         upcoinScore++;
+        playerUpcoins++;
         upcoinScoreText.setUpcoinScoreText(upcoinScore);
     }
 
