@@ -12,7 +12,6 @@ public class CoinSpawner extends EntitySpawner {
     private final double sceneWidth;
     private final Random random;
     private final List<Upcoin> upcoinList;
-    private double previousY;
 
     public CoinSpawner(long intervalInMs, double sceneWidth, List<Upcoin> upcoinList) {
         super(intervalInMs);
@@ -35,8 +34,7 @@ public class CoinSpawner extends EntitySpawner {
 
                 upcoinList.add(upcoin);
                 spawn(upcoin);
-                previousY = y;
         }
-    }
+      }
     }
 }
