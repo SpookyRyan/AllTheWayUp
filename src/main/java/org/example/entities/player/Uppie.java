@@ -56,6 +56,8 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
     protected void setupEntities() {
         addEntity(new UppieSprite(new Coordinate2D(0, 0), new Size(50, 50)));
         addEntity(new UppieHitBox(new Coordinate2D(0, 45)));
+        upcoinScore = 0;
+        score = 0;
     }
 
 
