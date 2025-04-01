@@ -132,7 +132,7 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
             isInLimit = true;
 
             if (platformSpawner != null) {
-                platformSpawner.verplaatsPlatformLocatiesNaarBeneden(verschil);
+                platformSpawner.updatePlatformLocation(verschil);
             }
 
 

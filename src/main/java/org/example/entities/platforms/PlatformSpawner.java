@@ -124,11 +124,11 @@ public class PlatformSpawner extends EntitySpawner {
         return false;
     }
 
-    public void verplaatsPlatformLocatiesNaarBeneden(double verschil) {
+    public void updatePlatformLocation(double verschil) {
         for (int i = 0; i < platformLocaties.size(); i++) {
-            Coordinate2D oudeLocatie = platformLocaties.get(i);
-            Coordinate2D nieuweLocatie = new Coordinate2D(oudeLocatie.getX(), oudeLocatie.getY() + verschil);
-            platformLocaties.set(i, nieuweLocatie);
+            Coordinate2D oldLocatie = platformLocaties.get(i);
+            Coordinate2D newLocation = new Coordinate2D(oldLocatie.getX(), oldLocatie.getY() + verschil);
+            platformLocaties.set(i, newLocation);
         }
     }
 
