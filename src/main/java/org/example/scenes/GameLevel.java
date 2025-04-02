@@ -7,8 +7,8 @@ import com.github.hanyaeger.api.scenes.DynamicScene;
 import org.example.AllTheWayUp;
 import org.example.entities.boosters.BoosterSpawner;
 import org.example.entities.enemy.EnemySpawner;
-import org.example.entities.objects.Upcoin;
-import org.example.entities.objects.CoinSpawner;
+import org.example.entities.upcoin.Upcoin;
+import org.example.entities.upcoin.CoinSpawner;
 import org.example.entities.platforms.PlatformSpawner;
 import org.example.entities.player.Uppie;
 import org.example.entities.text.ScoreText;
@@ -22,7 +22,7 @@ public class GameLevel extends DynamicScene implements EntitySpawnerContainer {
     private List<Collider> platformenList = new ArrayList<>();
     private List<Collider> boosterList = new ArrayList<>();
     private List<Collider> monsterList = new ArrayList<>();
-    private List<Upcoin> upcoinList = new ArrayList<>();
+    private List<Collider> upcoinList = new ArrayList<>();
     private Uppie uppie;
 
     public GameLevel(AllTheWayUp game) {
@@ -52,6 +52,7 @@ public class GameLevel extends DynamicScene implements EntitySpawnerContainer {
         uppie.setBoosters(boosterList);
         uppie.setMonsters(monsterList);
         uppie.setUpcoins(upcoinList);
+        uppie.setBoosters(boosterList);
 
         uppie.setScoreText(scoreText);
         uppie.setUpcoinScoreText(upcoinScoreText);
@@ -64,14 +65,12 @@ public class GameLevel extends DynamicScene implements EntitySpawnerContainer {
         PlatformSpawner spawner = new PlatformSpawner(10, getWidth(), getHeight(), platformenList);
         addEntitySpawner(spawner);
         uppie.setPlatformSpawner(spawner);
-        uppie.setBoosters(boosterList);
 
         BoosterSpawner boosterSpawner = new BoosterSpawner(10, getWidth(), uppie, boosterList);
         addEntitySpawner(boosterSpawner);
 
-        EnemySpawner enemySpawner = new EnemySpawner(10, getWidth(), getHeight(), monsterList, game);
+        EnemySpawner enemySpawner = new EnemySpawner(10, getWidth(), monsterList, game);
         addEntitySpawner(enemySpawner);
-        uppie.setMonsters(monsterList);
 
         CoinSpawner upcoinSpawner = new CoinSpawner(1000, getWidth(), upcoinList);
         addEntitySpawner(upcoinSpawner);

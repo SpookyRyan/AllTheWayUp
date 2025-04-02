@@ -4,6 +4,7 @@ import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.entities.Collider;
 import com.github.hanyaeger.api.entities.EntitySpawner;
+import org.example.entities.IOverlapping;
 import org.example.entities.player.Uppie;
 
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.Random;
 
 
-public class PlatformSpawner extends EntitySpawner {
+public class PlatformSpawner extends EntitySpawner implements IOverlapping {
     private final double sceneWidth;
     private final double sceneHeight;
     private final Random random;
@@ -31,15 +32,6 @@ public class PlatformSpawner extends EntitySpawner {
 
     @Override
     protected void spawnEntities() {
-
-//        platformenLijst.removeIf(p -> {
-//            if (p instanceof Platform && ((Platform) p).isRemoved()) {
-//                platformLocaties.remove(((Platform) p).getLocatie());
-//                return true;
-//            }
-//            return false;
-//        });
-
         if (startOfGame) {
             for (int x = 0; x <= sceneWidth; x += 60) {
                 Coordinate2D locatie = new Coordinate2D(x, sceneHeight - 20);
@@ -56,9 +48,6 @@ public class PlatformSpawner extends EntitySpawner {
             }
             startOfGame = false;
         }
-
-
-
 
         while (platformsPlaced < amountOfPlatforms) {
             double x = random.nextDouble() * (sceneWidth - 60 * 2) + 60;
@@ -91,9 +80,7 @@ public class PlatformSpawner extends EntitySpawner {
 
 
             Coordinate2D nieuweLocatie = new Coordinate2D(x, y);
-
             if (!isOverLapping(nieuweLocatie)) {
-                System.out.println("Limit");
                 if (random.nextDouble() < 0.8) {
                     NormalPlatform platform = new NormalPlatform(nieuweLocatie, new Size(60, 40));
                     spawn(platform);
@@ -113,9 +100,18 @@ public class PlatformSpawner extends EntitySpawner {
 
         }
 
+        for(int i = 0; i < platformLocaties.size(); i++) {
+            Coordinate2D locatie = platformLocaties.get(i);
+            if (locatie.getY() > sceneHeight) {
+                platformLocaties.remove(i);
+                platformsPlaced--;
+                break;
+            }
+        }
     }
 
-    private boolean isOverLapping(Coordinate2D nieuweLocatie) {
+    @Override
+    public boolean isOverLapping(Coordinate2D nieuweLocatie) {
         for (Coordinate2D locatie : platformLocaties) {
             if (locatie.distance(nieuweLocatie) < 120) {
                 return true;
@@ -131,5 +127,4 @@ public class PlatformSpawner extends EntitySpawner {
             platformLocaties.set(i, newLocation);
         }
     }
-
 }

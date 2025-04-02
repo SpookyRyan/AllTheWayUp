@@ -1,4 +1,4 @@
-package org.example.entities.objects;
+package org.example.entities.upcoin;
 
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.Size;
@@ -6,12 +6,13 @@ import com.github.hanyaeger.api.entities.Collided;
 import com.github.hanyaeger.api.entities.Collider;
 import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
 import com.github.hanyaeger.api.media.SoundClip;
+import org.example.entities.IMoveable;
 import org.example.entities.player.Uppie;
 import org.example.entities.player.UppieHitBox;
 
 import java.util.List;
 
-public class Upcoin extends DynamicSpriteEntity implements Collider, Collided, Coin {
+public class Upcoin extends DynamicSpriteEntity implements Collider, Collided, ICoin, IMoveable {
     private boolean collected = false;
 
     protected Upcoin(Coordinate2D initialLocation) {
@@ -44,13 +45,9 @@ public class Upcoin extends DynamicSpriteEntity implements Collider, Collided, C
         return collected;
     }
 
+    @Override
     public void moveDown(double amount) {
         setAnchorLocationY(getAnchorLocation().getY() + amount);
     }
-
-
-
-
-
 
 }

@@ -9,11 +9,8 @@ import com.github.hanyaeger.api.scenes.SceneBorder;
 import com.github.hanyaeger.api.userinput.KeyListener;
 import javafx.scene.input.KeyCode;
 import org.example.AllTheWayUp;
+import org.example.entities.IMoveable;
 import org.example.entities.UpcoinManager;
-import org.example.entities.boosters.BoosterEntity;
-import org.example.entities.enemy.Monster;
-import org.example.entities.objects.Upcoin;
-import org.example.entities.platforms.Platform;
 import org.example.entities.platforms.PlatformSpawner;
 import org.example.entities.text.ScoreText;
 import org.example.entities.text.UpcoinScoreText;
@@ -23,15 +20,15 @@ import java.util.Set;
 
 public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossingWatcher, KeyListener, TimerContainer, Newtonian, Collided {
     private final AllTheWayUp game;
+    private PlatformSpawner platformSpawner;
     private static boolean isInJump = false;
     private double currentGravity = 0;
     private final double jumpStartGravity = -2.7;
-    private final double maxGravity = 2;
     private double gravityStep = 0.1;
     private List<Collider> platforms;
     private List<Collider> boosterList;
     private List<Collider> monsterList;
-    private List<Upcoin> upcoinList;
+    private List<Collider> upcoinList;
     private double previousY;
     private static int score = 0;
     private ScoreText scoreText;
@@ -93,7 +90,6 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
         addTimer(new Timer(10) {
             @Override
             public void onAnimationUpdate(long timestamp) {
-
                 jumpAutomatically();
             }
         });
@@ -106,6 +102,7 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
             isInJump = true;
             UppieHitBox.setIsCollided(false);
         }
+        double maxGravity = 2;
         if (currentGravity < maxGravity) {
             currentGravity += gravityStep;
 
@@ -125,40 +122,20 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
         double limit = 230;
 
         if (uppieY < limit && uppieY < previousY) {
-            double verschil = previousY - uppieY;
+            double difference = previousY - uppieY;
             gravityStep = 0.15;
-            score += verschil/3;
+            score += difference / 3;
             setAnchorLocationY(limit);
             isInLimit = true;
 
             if (platformSpawner != null) {
-                platformSpawner.updatePlatformLocation(verschil);
+                platformSpawner.updatePlatformLocation(difference);
             }
 
-
-            for (Collider collider : platforms) {
-                if (collider instanceof Platform) {
-                    ((Platform) collider).moveDown(verschil);
-                }
-            }
-
-            for (Collider collider : boosterList) {
-                if (collider instanceof BoosterEntity) {
-                    ((BoosterEntity) collider).moveDown(verschil);
-                }
-            }
-
-            for (Collider collider : monsterList) {
-                if (collider instanceof Monster) {
-                    ((Monster) collider).moveDown(verschil);
-                }
-            }
-
-            for (Collider collider : upcoinList) {
-                if (collider instanceof Upcoin) {
-                    ((Upcoin) collider).moveDown(verschil);
-                }
-            }
+            moveObjectsDown(platforms, difference);
+            moveObjectsDown(boosterList, difference);
+            moveObjectsDown(monsterList, difference);
+            moveObjectsDown(upcoinList, difference);
 
         } else {
             gravityStep = 0.1;
@@ -166,16 +143,17 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
         previousY = getY();
     }
 
-    @Override
-    public void onCollision(List<Collider> list) {
-        /*
+    private void moveObjectsDown(List<Collider> list, double difference) {
         for (Collider collider : list) {
-            if(collider instanceof Upcoin){
-                upcoinScore++;
-                upcoinScoreText.setUpcoinScoreText(upcoinScore);
+            if (collider instanceof IMoveable IMoveable) {
+                IMoveable.moveDown(difference);
             }
         }
-        */
+    }
+
+    @Override
+    public void onCollision(List<Collider> list) {
+
     }
 
     public static void increaseUpcoinScore() {
@@ -201,7 +179,7 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
         this.monsterList = monsters;
     }
 
-    public void setUpcoins(List<Upcoin> upcoins) {
+    public void setUpcoins(List<Collider> upcoins) {
         this.upcoinList = upcoins;
     }
 
@@ -221,8 +199,6 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
     public void setIsInJump(boolean isJumping) {
         isInJump = isJumping;
     }
-
-    private PlatformSpawner platformSpawner;
 
     public void setPlatformSpawner(PlatformSpawner platformSpawner) {
         this.platformSpawner = platformSpawner;
