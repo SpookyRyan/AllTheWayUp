@@ -11,10 +11,6 @@ import javafx.scene.input.KeyCode;
 import org.example.AllTheWayUp;
 import org.example.entities.Moveable;
 import org.example.entities.UpcoinManager;
-import org.example.entities.boosters.BoosterEntity;
-import org.example.entities.enemy.Monster;
-import org.example.entities.upcoin.Upcoin;
-import org.example.entities.platforms.Platform;
 import org.example.entities.platforms.PlatformSpawner;
 import org.example.entities.text.ScoreText;
 import org.example.entities.text.UpcoinScoreText;
@@ -28,7 +24,6 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
     private static boolean isInJump = false;
     private double currentGravity = 0;
     private final double jumpStartGravity = -2.7;
-    private final double maxGravity = 2;
     private double gravityStep = 0.1;
     private List<Collider> platforms;
     private List<Collider> boosterList;
@@ -107,6 +102,7 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
             isInJump = true;
             UppieHitBox.setIsCollided(false);
         }
+        double maxGravity = 2;
         if (currentGravity < maxGravity) {
             currentGravity += gravityStep;
 
