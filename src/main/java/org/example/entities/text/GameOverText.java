@@ -8,7 +8,6 @@ import javafx.scene.text.FontWeight;
 import org.example.entities.player.Uppie;
 
 public class GameOverText extends TextEntity {
-    private Uppie uppie;
 
     public GameOverText(Coordinate2D initialLocation) {
         super(initialLocation);

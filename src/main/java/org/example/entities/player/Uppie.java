@@ -18,7 +18,7 @@ import org.example.entities.text.UpcoinScoreText;
 import java.util.List;
 import java.util.Set;
 
-public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossingWatcher, KeyListener, TimerContainer, Newtonian, Collided {
+public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossingWatcher, KeyListener, TimerContainer, Newtonian {
     private final AllTheWayUp game;
     private PlatformSpawner platformSpawner;
     private static boolean isInJump = false;
@@ -149,11 +149,6 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
                 IMoveable.moveDown(difference);
             }
         }
-    }
-
-    @Override
-    public void onCollision(List<Collider> list) {
-
     }
 
     public static void increaseUpcoinScore() {
