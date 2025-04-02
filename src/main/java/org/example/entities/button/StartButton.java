@@ -12,7 +12,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import org.example.AllTheWayUp;
 
-public class StartButton extends TextEntity implements MouseButtonPressedListener, MouseEnterListener, MouseExitListener {
+public class StartButton extends Button {
     private AllTheWayUp game;
 
     public StartButton(Coordinate2D initialLocation, AllTheWayUp game){
