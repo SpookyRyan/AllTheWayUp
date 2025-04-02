@@ -9,7 +9,7 @@ import com.github.hanyaeger.api.scenes.SceneBorder;
 import com.github.hanyaeger.api.userinput.KeyListener;
 import javafx.scene.input.KeyCode;
 import org.example.AllTheWayUp;
-import org.example.entities.Moveable;
+import org.example.entities.IMoveable;
 import org.example.entities.UpcoinManager;
 import org.example.entities.platforms.PlatformSpawner;
 import org.example.entities.text.ScoreText;
@@ -122,20 +122,20 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
         double limit = 230;
 
         if (uppieY < limit && uppieY < previousY) {
-            double verschil = previousY - uppieY;
+            double difference = previousY - uppieY;
             gravityStep = 0.15;
-            score += verschil/3;
+            score += difference / 3;
             setAnchorLocationY(limit);
             isInLimit = true;
 
             if (platformSpawner != null) {
-                platformSpawner.updatePlatformLocation(verschil);
+                platformSpawner.updatePlatformLocation(difference);
             }
 
-            moveObjectsDown(platforms, verschil);
-            moveObjectsDown(boosterList, verschil);
-            moveObjectsDown(monsterList, verschil);
-            moveObjectsDown(upcoinList, verschil);
+            moveObjectsDown(platforms, difference);
+            moveObjectsDown(boosterList, difference);
+            moveObjectsDown(monsterList, difference);
+            moveObjectsDown(upcoinList, difference);
 
         } else {
             gravityStep = 0.1;
@@ -145,22 +145,15 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
 
     private void moveObjectsDown(List<Collider> list, double difference) {
         for (Collider collider : list) {
-            if (collider instanceof Moveable moveable) {
-                moveable.moveDown(difference);
+            if (collider instanceof IMoveable IMoveable) {
+                IMoveable.moveDown(difference);
             }
         }
     }
 
     @Override
     public void onCollision(List<Collider> list) {
-        /*
-        for (Collider collider : list) {
-            if(collider instanceof Upcoin){
-                upcoinScore++;
-                upcoinScoreText.setUpcoinScoreText(upcoinScore);
-            }
-        }
-        */
+
     }
 
     public static void increaseUpcoinScore() {

@@ -6,9 +6,9 @@ import com.github.hanyaeger.api.entities.Collider;
 import com.github.hanyaeger.api.entities.SceneBorderCrossingWatcher;
 import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
 import com.github.hanyaeger.api.scenes.SceneBorder;
-import org.example.entities.Moveable;
+import org.example.entities.IMoveable;
 
-public class Platform extends DynamicSpriteEntity implements Collider, SceneBorderCrossingWatcher, Moveable {
+public class Platform extends DynamicSpriteEntity implements Collider, SceneBorderCrossingWatcher, IMoveable {
     private PlatformHitBox hitbox;
     private boolean removed = false;
     private Coordinate2D locatie;

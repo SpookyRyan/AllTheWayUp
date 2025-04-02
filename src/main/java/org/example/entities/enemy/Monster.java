@@ -6,12 +6,12 @@ import com.github.hanyaeger.api.entities.Collided;
 import com.github.hanyaeger.api.entities.Collider;
 import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
 import org.example.AllTheWayUp;
-import org.example.entities.Moveable;
+import org.example.entities.IMoveable;
 import org.example.entities.player.UppieHitBox;
 
 import java.util.List;
 
-public class Monster extends DynamicSpriteEntity implements Collided, Collider, Moveable {
+public class Monster extends DynamicSpriteEntity implements Collided, Collider, IMoveable {
     private final AllTheWayUp game;
 
     protected Monster(Coordinate2D initialLocation, AllTheWayUp game) {

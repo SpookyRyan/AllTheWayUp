@@ -1,6 +1,6 @@
 package org.example.entities.upcoin;
 
-public interface Coin {
+public interface ICoin {
     void collect();
     boolean isCollected();
 }

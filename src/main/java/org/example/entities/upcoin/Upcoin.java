@@ -6,13 +6,13 @@ import com.github.hanyaeger.api.entities.Collided;
 import com.github.hanyaeger.api.entities.Collider;
 import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
 import com.github.hanyaeger.api.media.SoundClip;
-import org.example.entities.Moveable;
+import org.example.entities.IMoveable;
 import org.example.entities.player.Uppie;
 import org.example.entities.player.UppieHitBox;
 
 import java.util.List;
 
-public class Upcoin extends DynamicSpriteEntity implements Collider, Collided, Coin, Moveable {
+public class Upcoin extends DynamicSpriteEntity implements Collider, Collided, ICoin, IMoveable {
     private boolean collected = false;
 
     protected Upcoin(Coordinate2D initialLocation) {
