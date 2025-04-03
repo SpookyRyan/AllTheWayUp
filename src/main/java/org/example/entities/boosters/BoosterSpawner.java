@@ -25,7 +25,7 @@ public class BoosterSpawner extends EntitySpawner {
 
     @Override
     protected void spawnEntities() {
-        if (random.nextDouble() < 0.0015) {
+        if (random.nextDouble() < 0.005) {
             double x = random.nextDouble() * (sceneWidth - 60);
             double y = -50;
 
