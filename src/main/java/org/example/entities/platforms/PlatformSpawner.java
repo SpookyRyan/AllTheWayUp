@@ -17,17 +17,17 @@ public class PlatformSpawner extends EntitySpawner implements IOverlapping {
     private final double sceneHeight;
     private final Random random;
     private int platformsPlaced = 0;
-    private final List<Coordinate2D> platformLocaties = new ArrayList<>();
+    private final List<Coordinate2D> platformLocations = new ArrayList<>();
     private int amountOfPlatforms = 15;
     private boolean startOfGame = true;
-    private final List<Collider> platformenList;
+    private final List<Collider> platformList;
 
     public PlatformSpawner(long intervalInMs, double sceneWidth, double sceneHeight, List<Collider> platformenList) {
         super(intervalInMs);
         this.sceneWidth = sceneWidth;
         this.sceneHeight = sceneHeight;
         this.random = new Random();
-        this.platformenList = platformenList;
+        this.platformList = platformenList;
     }
 
     @Override
@@ -38,7 +38,7 @@ public class PlatformSpawner extends EntitySpawner implements IOverlapping {
 
                 NormalPlatform platform = new NormalPlatform(locatie, new Size(60, 40));
                 spawn(platform);
-                platformenList.add(platform);
+                platformList.add(platform);
 
                 PlatformHitBox hitbox = new PlatformHitBox(locatie, "Normal");
                 platform.setHitbox(hitbox);
@@ -59,7 +59,7 @@ public class PlatformSpawner extends EntitySpawner implements IOverlapping {
                 if (random.nextDouble() < 0.8) {
                     NormalPlatform platform = new NormalPlatform(newLocation, new Size(60, 40));
                     spawn(platform);
-                    platformenList.add(platform);
+                    platformList.add(platform);
 
                     PlatformHitBox hitbox = new PlatformHitBox(newLocation, "Normal");
                     platform.setHitbox(hitbox);
@@ -67,9 +67,9 @@ public class PlatformSpawner extends EntitySpawner implements IOverlapping {
                 } else {
                     BrokenPlatform platform = new BrokenPlatform(newLocation, new Size(60, 40));
                     spawn(platform);
-                    platformenList.add(platform);
+                    platformList.add(platform);
                 }
-                platformLocaties.add(newLocation);
+                platformLocations.add(newLocation);
                 platformsPlaced++;
             }
         }
@@ -84,7 +84,7 @@ public class PlatformSpawner extends EntitySpawner implements IOverlapping {
                 if (random.nextDouble() < 0.8) {
                     NormalPlatform platform = new NormalPlatform(nieuweLocatie, new Size(60, 40));
                     spawn(platform);
-                    platformenList.add(platform);
+                    platformList.add(platform);
 
                     PlatformHitBox hitbox = new PlatformHitBox(nieuweLocatie, "Normal");
                     platform.setHitbox(hitbox);
@@ -92,18 +92,18 @@ public class PlatformSpawner extends EntitySpawner implements IOverlapping {
                 } else {
                     BrokenPlatform platform = new BrokenPlatform(nieuweLocatie, new Size(60, 40));
                     spawn(platform);
-                    platformenList.add(platform);
+                    platformList.add(platform);
                 }
-                platformLocaties.add(nieuweLocatie);
+                platformLocations.add(nieuweLocatie);
                 platformsPlaced++;
             }
 
         }
 
-        for(int i = 0; i < platformLocaties.size(); i++) {
-            Coordinate2D locatie = platformLocaties.get(i);
+        for(int i = 0; i < platformLocations.size(); i++) {
+            Coordinate2D locatie = platformLocations.get(i);
             if (locatie.getY() > sceneHeight) {
-                platformLocaties.remove(i);
+                platformLocations.remove(i);
                 platformsPlaced--;
                 break;
             }
@@ -112,7 +112,7 @@ public class PlatformSpawner extends EntitySpawner implements IOverlapping {
 
     @Override
     public boolean isOverLapping(Coordinate2D nieuweLocatie) {
-        for (Coordinate2D locatie : platformLocaties) {
+        for (Coordinate2D locatie : platformLocations) {
             if (locatie.distance(nieuweLocatie) < 120) {
                 return true;
             }
@@ -121,10 +121,10 @@ public class PlatformSpawner extends EntitySpawner implements IOverlapping {
     }
 
     public void updatePlatformLocation(double difference) {
-        for (int i = 0; i < platformLocaties.size(); i++) {
-            Coordinate2D oldLocatie = platformLocaties.get(i);
+        for (int i = 0; i < platformLocations.size(); i++) {
+            Coordinate2D oldLocatie = platformLocations.get(i);
             Coordinate2D newLocation = new Coordinate2D(oldLocatie.getX(), oldLocatie.getY() + difference);
-            platformLocaties.set(i, newLocation);
+            platformLocations.set(i, newLocation);
         }
     }
 }

@@ -6,7 +6,6 @@ import com.github.hanyaeger.api.userinput.MouseButtonPressedListener;
 import com.github.hanyaeger.api.userinput.MouseEnterListener;
 import com.github.hanyaeger.api.userinput.MouseExitListener;
 import javafx.scene.input.MouseButton;
-import org.example.AllTheWayUp;
 
 public class Button extends TextEntity implements MouseButtonPressedListener, MouseEnterListener, MouseExitListener {
 
