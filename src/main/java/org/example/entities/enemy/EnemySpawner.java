@@ -33,6 +33,7 @@ public class EnemySpawner extends EntitySpawner {
             Monster monster = new Monster(newLocation, game);
             spawn(monster);
             monsterList.add(monster);
+            Uppie.setIsInLimit(false);
         }
 
 

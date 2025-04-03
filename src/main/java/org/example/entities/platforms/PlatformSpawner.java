@@ -53,23 +53,23 @@ public class PlatformSpawner extends EntitySpawner implements IOverlapping {
             double x = random.nextDouble() * (sceneWidth - 60 * 2) + 60;
             double y = random.nextDouble() * (sceneHeight - 80);
 
-            Coordinate2D nieuweLocatie = new Coordinate2D(x, y);
+            Coordinate2D newLocation = new Coordinate2D(x, y);
 
-            if (!isOverLapping(nieuweLocatie)) {
+            if (!isOverLapping(newLocation)) {
                 if (random.nextDouble() < 0.8) {
-                    NormalPlatform platform = new NormalPlatform(nieuweLocatie, new Size(60, 40));
+                    NormalPlatform platform = new NormalPlatform(newLocation, new Size(60, 40));
                     spawn(platform);
                     platformenList.add(platform);
 
-                    PlatformHitBox hitbox = new PlatformHitBox(nieuweLocatie, "Normal");
+                    PlatformHitBox hitbox = new PlatformHitBox(newLocation, "Normal");
                     platform.setHitbox(hitbox);
                     spawn(hitbox);
                 } else {
-                    BrokenPlatform platform = new BrokenPlatform(nieuweLocatie, new Size(60, 40));
+                    BrokenPlatform platform = new BrokenPlatform(newLocation, new Size(60, 40));
                     spawn(platform);
                     platformenList.add(platform);
                 }
-                platformLocaties.add(nieuweLocatie);
+                platformLocaties.add(newLocation);
                 platformsPlaced++;
             }
         }
@@ -120,10 +120,10 @@ public class PlatformSpawner extends EntitySpawner implements IOverlapping {
         return false;
     }
 
-    public void updatePlatformLocation(double verschil) {
+    public void updatePlatformLocation(double difference) {
         for (int i = 0; i < platformLocaties.size(); i++) {
             Coordinate2D oldLocatie = platformLocaties.get(i);
-            Coordinate2D newLocation = new Coordinate2D(oldLocatie.getX(), oldLocatie.getY() + verschil);
+            Coordinate2D newLocation = new Coordinate2D(oldLocatie.getX(), oldLocatie.getY() + difference);
             platformLocaties.set(i, newLocation);
         }
     }

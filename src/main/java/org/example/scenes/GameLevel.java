@@ -7,7 +7,6 @@ import com.github.hanyaeger.api.scenes.DynamicScene;
 import org.example.AllTheWayUp;
 import org.example.entities.boosters.BoosterSpawner;
 import org.example.entities.enemy.EnemySpawner;
-import org.example.entities.upcoin.Upcoin;
 import org.example.entities.upcoin.CoinSpawner;
 import org.example.entities.platforms.PlatformSpawner;
 import org.example.entities.player.Uppie;
@@ -19,7 +18,7 @@ import java.util.List;
 
 public class GameLevel extends DynamicScene implements EntitySpawnerContainer {
     private AllTheWayUp game;
-    private List<Collider> platformenList = new ArrayList<>();
+    private List<Collider> platformList = new ArrayList<>();
     private List<Collider> boosterList = new ArrayList<>();
     private List<Collider> monsterList = new ArrayList<>();
     private List<Collider> upcoinList = new ArrayList<>();
@@ -48,11 +47,10 @@ public class GameLevel extends DynamicScene implements EntitySpawnerContainer {
 
         uppie = new Uppie(new Coordinate2D(250, 700), game);
         uppie.setViewOrder(1);
-        uppie.setPlatforms(platformenList);
+        uppie.setPlatforms(platformList);
         uppie.setBoosters(boosterList);
         uppie.setMonsters(monsterList);
         uppie.setUpcoins(upcoinList);
-        uppie.setBoosters(boosterList);
 
         uppie.setScoreText(scoreText);
         uppie.setUpcoinScoreText(upcoinScoreText);
@@ -62,7 +60,7 @@ public class GameLevel extends DynamicScene implements EntitySpawnerContainer {
 
     @Override
     public void setupEntitySpawners() {
-        PlatformSpawner spawner = new PlatformSpawner(10, getWidth(), getHeight(), platformenList);
+        PlatformSpawner spawner = new PlatformSpawner(10, getWidth(), getHeight(), platformList);
         addEntitySpawner(spawner);
         uppie.setPlatformSpawner(spawner);
 

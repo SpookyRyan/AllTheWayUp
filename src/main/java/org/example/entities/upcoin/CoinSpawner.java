@@ -35,6 +35,7 @@ public class CoinSpawner extends EntitySpawner {
 
                 upcoinList.add(upcoin);
                 spawn(upcoin);
+                Uppie.setIsInLimit(false);
         }
       }
     }
