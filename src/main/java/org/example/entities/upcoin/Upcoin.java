@@ -41,7 +41,7 @@ public class Upcoin extends DynamicSpriteEntity implements Collider, Collided, I
     }
 
     @Override
-    public boolean isCollected() {
+    public boolean setIsCollected() {
         return collected;
     }
 

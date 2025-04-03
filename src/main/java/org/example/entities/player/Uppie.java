@@ -23,7 +23,7 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
     private PlatformSpawner platformSpawner;
     private static boolean isInJump = false;
     private double currentGravity = 0;
-    private final double jumpStartGravity = -2.7;
+    private double jumpStartGravity = -2.7;
     private double gravityStep = 0.1;
     private List<Collider> platforms;
     private List<Collider> boosterList;
@@ -34,7 +34,7 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
     private ScoreText scoreText;
     private static UpcoinScoreText upcoinScoreText;
     private static int upcoinScore = 0;
-    public static boolean isInLimit;
+    private static boolean isInLimit;
     public static int playerUpcoins = UpcoinManager.loadHighscore();
 
     public Uppie(Coordinate2D initialLocation, AllTheWayUp game) {
@@ -143,7 +143,7 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
         previousY = getY();
     }
 
-    private void moveObjectsDown(List<Collider> list, double difference) {
+    public void moveObjectsDown(List<Collider> list, double difference) {
         for (Collider collider : list) {
             if (collider instanceof IMoveable IMoveable) {
                 IMoveable.moveDown(difference);

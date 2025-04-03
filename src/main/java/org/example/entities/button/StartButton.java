@@ -9,7 +9,7 @@ import javafx.scene.text.FontWeight;
 import org.example.AllTheWayUp;
 
 public class StartButton extends Button {
-    private AllTheWayUp game;
+    private final AllTheWayUp game;
 
     public StartButton(Coordinate2D initialLocation, AllTheWayUp game){
         super(initialLocation,"Start Spel");

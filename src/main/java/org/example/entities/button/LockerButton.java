@@ -9,7 +9,7 @@ import javafx.scene.text.FontWeight;
 import org.example.AllTheWayUp;
 
 public class LockerButton extends Button {
-    private AllTheWayUp game;
+    private final AllTheWayUp game;
 
     public LockerButton(Coordinate2D initialLocation, AllTheWayUp game){
         super(initialLocation,"Locker (Work in Progress)");

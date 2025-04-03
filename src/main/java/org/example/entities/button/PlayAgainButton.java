@@ -9,7 +9,7 @@ import javafx.scene.text.FontWeight;
 import org.example.AllTheWayUp;
 
 public class PlayAgainButton extends Button {
-    private AllTheWayUp game;
+    private final AllTheWayUp game;
 
     public PlayAgainButton(Coordinate2D initialLocation, AllTheWayUp game){
         super(initialLocation,"Speel opnieuw");

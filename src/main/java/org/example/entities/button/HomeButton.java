@@ -9,7 +9,7 @@ import javafx.scene.text.FontWeight;
 import org.example.AllTheWayUp;
 
 public class HomeButton extends Button {
-    private AllTheWayUp game;
+    private final AllTheWayUp game;
 
     public HomeButton(Coordinate2D initialLocation, AllTheWayUp game){
         super(initialLocation,"Terug naar menu");
