@@ -112,10 +112,10 @@ public class Uppie extends DynamicCompositeEntity implements SceneBorderCrossing
                 isInJump = false;
             }
         }
-        checkOfUppieBovenLimitIs(platforms);
+        checkIfUppieAboveLimit(platforms);
     }
 
-    public void checkOfUppieBovenLimitIs(List<Collider> list){
+    public void checkIfUppieAboveLimit(List<Collider> list){
         if (list == null) return;
         scoreText.setScoreText(score);
         double uppieY = getY();
